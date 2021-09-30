@@ -1,0 +1,38 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ggswimlane
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+ggswimlane is a ggplot wrapper that simplifies the construction of swimlane plots, which are a common tool for showing patient trajectories through a clinical trial.
+
+## Installation
+
+You can install the released version of ggswimlane from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("tgerke/ggswimlane")
+```
+
+## Example
+
+```{r example}
+library(ggswimlane)
+
+dplyr::glimpse(patient_disposition)
+```
