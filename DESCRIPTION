@@ -1,15 +1,16 @@
 Package: ggswimlane
-Title: What the Package Does (One Line, Title Case)
+Title: Create Clinical Trial Swimlanes with ggplot
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Travis",
+           family = "Gerke",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+           email = "tgerke@mail.harvard.edu",
+           comment = c(ORCID = "0000-0002-9500-8907"))
+Description: ggswimlane is a ggplot wrapper that simplifies the construction
+    of swimlane plots, which are a common tool for showing patient 
+    trajectories through a clinical trial.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
