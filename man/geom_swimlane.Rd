@@ -23,7 +23,7 @@ A geom for swimlane plots
 }
 \examples{
 patient_disposition \%>\%
-  dplyr::mutate(subject = reorder(factor(.data$subject), .data$weeks_on_study)) \%>\%
+  order_swimlane(subject, weeks_on_study, cohort) \%>\%
   ggplot2::ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort)
 }

@@ -19,7 +19,8 @@ Imports:
     ggplot2,
     lubridate,
     magrittr,
-    rlang
+    rlang,
+    stats
 Depends: 
     R (>= 2.10)
 LazyData: true

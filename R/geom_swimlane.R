@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' patient_disposition %>%
-#'   dplyr::mutate(subject = reorder(factor(.data$subject), .data$weeks_on_study)) %>%
+#'   order_swimlane(subject, weeks_on_study, cohort) %>%
 #'   ggplot2::ggplot() +
 #'   geom_swimlane(subject, weeks_on_study, cohort)
 geom_swimlane <- function(
@@ -21,18 +21,19 @@ geom_swimlane <- function(
 
   ##FIXME: need to assert that cols exist in .data
 
-  id_exprs <- rlang::enexpr(id_var)
-  duration_exprs <- rlang::enexpr(duration_var)
+  id_var <- rlang::enexpr(id_var)
+  duration_var <- rlang::enexpr(duration_var)
+  cohort_var <- rlang::enexpr(cohort_var)
 
   # Swimlane with no cohort
-  if(rlang::quo_is_null(rlang::enquo(cohort_var))) {
+  if(rlang::is_null(cohort_var)) {
     return(
       list(
         ggplot2::geom_bar(
           stat = "identity",
           ggplot2::aes(
-            x = .data[[id_exprs]],
-            y = .data[[duration_exprs]]
+            x = .data[[id_var]],
+            y = .data[[duration_var]]
           ),
           width = .6
         ),
@@ -42,14 +43,13 @@ geom_swimlane <- function(
   }
 
   # Swimlane with cohort
-  cohort_exprs <- rlang::enexpr(cohort_var)
   list(
     ggplot2::geom_bar(
       stat = "identity",
       ggplot2::aes(
-        x = .data[[id_exprs]],
-        y = .data[[duration_exprs]],
-        fill = .data[[cohort_exprs]]
+        x = .data[[id_var]],
+        y = .data[[duration_var]],
+        fill = .data[[cohort_var]]
       ),
       width = .6
     ),
