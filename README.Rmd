@@ -9,11 +9,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  fig.retina = 3
 )
 ```
 
 # ggswimlane
+
+__* Still in development__
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -31,8 +34,30 @@ devtools::install_github("tgerke/ggswimlane")
 
 ## Example
 
-```{r example}
+```{r example, message=FALSE}
+library(dplyr)
+library(ggplot2)
 library(ggswimlane)
 
-dplyr::glimpse(patient_disposition)
+patient_disposition %>%
+  mutate(
+    reason_off_study = tidyr::replace_na(reason_off_study, "&#8594;"),
+    prior_drug = dplyr::case_when(
+      prior_drug == "Yes"~ "&#9658;", 
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  order_swimlane(subject, weeks_on_study, cohort) %>%
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) + 
+  ggsci::scale_fill_jco() +
+  geom_swimlane_text(subject, weeks_on_study, reason_off_study) + 
+  geom_point(
+    aes(x = subject, y = partial_response), 
+    na.rm = TRUE
+  ) + 
+  geom_swimlane_rug(x = subject, label_var = prior_drug, color = "#CD534C") + 
+  theme_swimlane(legend.position = c(.8, .1)) + 
+  ggtitle("Time on study by subject") + 
+  ylab("Weeks on study")
 ```

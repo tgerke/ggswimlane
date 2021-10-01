@@ -3,6 +3,8 @@
 
 # ggswimlane
 
+**\* Still in development**
+
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -23,15 +25,31 @@ devtools::install_github("tgerke/ggswimlane")
 ## Example
 
 ``` r
+library(dplyr)
+library(ggplot2)
 library(ggswimlane)
 
-dplyr::glimpse(patient_disposition)
-#> Rows: 20
-#> Columns: 6
-#> $ subject          <chr> "339057", "751377", "297647", "992253", "542555", "98…
-#> $ weeks_on_study   <dbl> 70.3153450, 31.1616594, 42.6181308, 22.7623721, 64.91…
-#> $ cohort           <chr> "Cohort A", "Cohort B", "Cohort B", "Cohort A", "Coho…
-#> $ reason_off_study <chr> "Physician decision", "Withdrawal by subject", "Disea…
-#> $ prior_drug       <chr> "Yes", "No", "Yes", "Yes", "Yes", "Yes", "No", "Yes",…
-#> $ partial_response <dbl> 35.729492, NA, NA, NA, NA, 10.789094, NA, 26.134307, …
+patient_disposition %>%
+  mutate(
+    reason_off_study = tidyr::replace_na(reason_off_study, "&#8594;"),
+    prior_drug = dplyr::case_when(
+      prior_drug == "Yes"~ "&#9658;", 
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  order_swimlane(subject, weeks_on_study, cohort) %>%
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) + 
+  ggsci::scale_fill_jco() +
+  geom_swimlane_text(subject, weeks_on_study, reason_off_study) + 
+  geom_point(
+    aes(x = subject, y = partial_response), 
+    na.rm = TRUE
+  ) + 
+  geom_swimlane_rug(x = subject, label_var = prior_drug, color = "#CD534C") + 
+  theme_swimlane(legend.position = c(.8, .1)) + 
+  ggtitle("Time on study by subject") + 
+  ylab("Weeks on study")
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
