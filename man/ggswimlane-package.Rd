@@ -10,6 +10,13 @@ ggswimlane is a ggplot wrapper that simplifies the construction
     of swimlane plots, which are a common tool for showing patient 
     trajectories through a clinical trial.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://tgerke.github.io/ggswimlane}
+}
+
+}
 \author{
 \strong{Maintainer}: Travis Gerke \email{tgerke@mail.harvard.edu} (\href{https://orcid.org/0000-0002-9500-8907}{ORCID})
 

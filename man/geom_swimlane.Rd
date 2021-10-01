@@ -22,8 +22,12 @@ A ggplot2 compatible geom
 A geom for swimlane plots
 }
 \examples{
+library(ggplot2)
+
 patient_disposition \%>\%
   order_swimlane(subject, weeks_on_study, cohort) \%>\%
-  ggplot2::ggplot() +
-  geom_swimlane(subject, weeks_on_study, cohort)
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) +
+  theme_swimlane(legend.position = c(.9, .1)) +
+  ylab("Weeks on study")
 }

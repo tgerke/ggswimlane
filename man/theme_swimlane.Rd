@@ -16,12 +16,13 @@ often to account for text annotations}
 A ggplot theme for swimlane plots
 }
 \examples{
+library(ggplot2)
+
 patient_disposition \%>\%
   order_swimlane(subject, weeks_on_study, cohort) \%>\%
-  ggplot2::ggplot() +
+  ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
   ggsci::scale_fill_jco() +
-  theme_swimlane(legend.position = c(.8, .1)) +
-  ggplot2::ggtitle("Time on study by subject") +
-  ggplot2::ylab("Weeks on study")
+  theme_swimlane(legend.position = c(.8, .1))  \%+replace\%
+  theme(axis.title.x = element_blank())
 }
