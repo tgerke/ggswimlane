@@ -2,6 +2,7 @@
 
 export("%>%")
 export(geom_swimlane)
+export(geom_swimlane_rug)
 export(geom_swimlane_text)
 export(order_swimlane)
 export(theme_swimlane)

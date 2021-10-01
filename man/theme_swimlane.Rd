@@ -23,5 +23,5 @@ patient_disposition \%>\%
   ggsci::scale_fill_jco() +
   theme_swimlane(legend.position = c(.8, .1)) +
   ggplot2::ggtitle("Time on study by subject") +
-  ggplot2::ylab("\nWeeks on study")
+  ggplot2::ylab("Weeks on study")
 }

@@ -31,8 +31,6 @@ patient_disposition \%>\%
   geom_swimlane(subject, weeks_on_study, cohort) +
   ggsci::scale_fill_jco() +
   geom_swimlane_text(subject, weeks_on_study, reason_off_study) +
-  theme_swimlane(
-    legend.position = c(.9, .1),
-    axis.title.x = element_blank()
-  )
+  theme_swimlane(legend.position = c(.9, .1)) \%+replace\%
+  theme(axis.title.x = element_blank())
 }
