@@ -28,3 +28,4 @@ LazyData: true
 Suggests: 
     tidyr,
     ggsci
+URL: https://tgerke.github.io/ggswimlane
