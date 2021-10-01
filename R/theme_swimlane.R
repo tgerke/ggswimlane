@@ -1,5 +1,7 @@
 #' A ggplot theme for swimlane plots
 #'
+#' @param extra_margin_r Number (of pt units) to add to right margin, most
+#' often to account for text annotations
 #' @param ... Further arguments to ggplot2::theme()
 #'
 #' @export
@@ -13,7 +15,7 @@
 #'   theme_swimlane(legend.position = c(.8, .1)) +
 #'   ggplot2::ggtitle("Time on study by subject") +
 #'   ggplot2::ylab("\nWeeks on study")
-theme_swimlane <- function(...) {
+theme_swimlane <- function(extra_margin_r = 15, ...) {
   ggplot2::theme_bw() +
   ggplot2::theme(
     plot.title.position = "plot",
@@ -26,6 +28,7 @@ theme_swimlane <- function(...) {
       fill="white", size = 0
     ),
     legend.title = ggplot2::element_blank(),
+    plot.margin = ggplot2::margin(5.5, 5.5 + extra_margin_r, 5.5, 5.5, "pt"),
     ...
   )
 }

@@ -37,7 +37,7 @@ geom_swimlane <- function(
           ),
           width = .6
         ),
-        ggplot2::coord_flip()
+        ggplot2::coord_flip(clip = "off")
       )
     )
   }
@@ -53,7 +53,7 @@ geom_swimlane <- function(
       ),
       width = .6
     ),
-    ggplot2::coord_flip()
+    ggplot2::coord_flip(clip = "off")
   )
 
 }

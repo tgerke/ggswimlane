@@ -4,9 +4,12 @@
 \alias{theme_swimlane}
 \title{A ggplot theme for swimlane plots}
 \usage{
-theme_swimlane(...)
+theme_swimlane(extra_margin_r = 15, ...)
 }
 \arguments{
+\item{extra_margin_r}{Number (of pt units) to add to right margin, most
+often to account for text annotations}
+
 \item{...}{Further arguments to ggplot2::theme()}
 }
 \description{
