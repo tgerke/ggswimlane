@@ -3,6 +3,7 @@
 export("%>%")
 export(geom_swimlane)
 export(order_swimlane)
+export(theme_swimlane)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
 importFrom(stats,reorder)
