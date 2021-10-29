@@ -38,7 +38,8 @@ geom_swimlane_text <- function(x, y, label, ...) {
     hjust = 0,
     size = 2,
     label.size = 0,
-    na.rm = TRUE
+    na.rm = TRUE,
+    show.legend = FALSE
   )
 
 }
