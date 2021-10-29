@@ -5,7 +5,7 @@
 #' @param id_var Column name for subject identifier
 #' @param duration_var Column name for numeric length of time on study
 #' @param cohort_var Optional column name to sort by cohort
-#' @param ... Other options passed to
+#' @param ... Other options passed to geom_bar
 #'
 #' @return A ggplot2 compatible geom
 #' @export
@@ -39,7 +39,8 @@ geom_swimlane <- function(
             x = .data[[id_var]],
             y = .data[[duration_var]]
           ),
-          width = .6
+          width = .6,
+          ...
         ),
         ggplot2::coord_flip(clip = "off")
       )
@@ -55,7 +56,8 @@ geom_swimlane <- function(
         y = .data[[duration_var]],
         fill = .data[[cohort_var]]
       ),
-      width = .6
+      width = .6,
+      ...
     ),
     ggplot2::coord_flip(clip = "off")
   )
