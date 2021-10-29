@@ -149,28 +149,28 @@ geom_swimlane()</p>
     <pre class="examples"><div class='input'><span class='va'>patient_disposition</span> <span class='op'>%&gt;%</span>
   <span class='fu'>order_swimlane</span><span class='op'>(</span><span class='va'>subject</span>, <span class='va'>weeks_on_study</span>, <span class='va'>cohort</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 × 6</span>
-#&gt;    subject weeks_on_study cohort   reason_off_study      prior_drug partial_response
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> 980129          15.0   Cohort B Withdrawal by subject Yes                   10.8 
-#&gt; <span style='color: #BCBCBC;'> 2</span> 986548          26.9   Cohort B Withdrawal by subject No                    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'> 3</span> 223561          27.5   Cohort B Physician decision    Yes                   26.1 
-#&gt; <span style='color: #BCBCBC;'> 4</span> 751377          31.2   Cohort B Withdrawal by subject No                    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'> 5</span> 297647          42.6   Cohort B Disease progression   Yes                   <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'> 6</span> 321235          64.7   Cohort B Adverse event         No                    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'> 7</span> 226603          74.4   Cohort B Disease progression   No                    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'> 8</span> 361221          78.7   Cohort B Completed             Yes                   60.2 
-#&gt; <span style='color: #BCBCBC;'> 9</span> 460588          79.6   Cohort B <span style='color: #BB0000;'>NA</span>                    Yes                   <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>10</span> 158396           0.186 Cohort A Adverse event         Yes                   <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>11</span> 992253          22.8   Cohort A Adverse event         Yes                   <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>12</span> 828351          40.9   Cohort A Disease progression   Yes                    8.82
-#&gt; <span style='color: #BCBCBC;'>13</span> 467205          52.5   Cohort A Disease progression   Yes                   44.6 
-#&gt; <span style='color: #BCBCBC;'>14</span> 542555          64.9   Cohort A Disease progression   Yes                   <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>15</span> 339057          70.3   Cohort A Physician decision    Yes                   35.7 
-#&gt; <span style='color: #BCBCBC;'>16</span> 690585          72.2   Cohort A Adverse event         Yes                   52.2 
-#&gt; <span style='color: #BCBCBC;'>17</span> 465452          86.4   Cohort A <span style='color: #BB0000;'>NA</span>                    No                    67.3 
-#&gt; <span style='color: #BCBCBC;'>18</span> 337310          86.5   Cohort A Completed             No                    <span style='color: #BB0000;'>NA</span>   
-#&gt; <span style='color: #BCBCBC;'>19</span> 494306          87.6   Cohort A <span style='color: #BB0000;'>NA</span>                    Yes                    8.26
-#&gt; <span style='color: #BCBCBC;'>20</span> 482665          94.2   Cohort A Completed             No                    <span style='color: #BB0000;'>NA</span>   </div></pre>
+#&gt;    subject weeks_on_study cohort   reason_off_study  prior_drug partial_response
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> 980129          15.0   Cohort B Withdrawal by su… Yes                   10.8 
+#&gt; <span style='color: #BCBCBC;'> 2</span> 986548          26.9   Cohort B Withdrawal by su… No                    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'> 3</span> 223561          27.5   Cohort B Physician decisi… Yes                   26.1 
+#&gt; <span style='color: #BCBCBC;'> 4</span> 751377          31.2   Cohort B Withdrawal by su… No                    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'> 5</span> 297647          42.6   Cohort B Disease progress… Yes                   <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'> 6</span> 321235          64.7   Cohort B Adverse event     No                    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'> 7</span> 226603          74.4   Cohort B Disease progress… No                    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'> 8</span> 361221          78.7   Cohort B Completed         Yes                   60.2 
+#&gt; <span style='color: #BCBCBC;'> 9</span> 460588          79.6   Cohort B <span style='color: #BB0000;'>NA</span>                Yes                   <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>10</span> 158396           0.186 Cohort A Adverse event     Yes                   <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>11</span> 992253          22.8   Cohort A Adverse event     Yes                   <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>12</span> 828351          40.9   Cohort A Disease progress… Yes                    8.82
+#&gt; <span style='color: #BCBCBC;'>13</span> 467205          52.5   Cohort A Disease progress… Yes                   44.6 
+#&gt; <span style='color: #BCBCBC;'>14</span> 542555          64.9   Cohort A Disease progress… Yes                   <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>15</span> 339057          70.3   Cohort A Physician decisi… Yes                   35.7 
+#&gt; <span style='color: #BCBCBC;'>16</span> 690585          72.2   Cohort A Adverse event     Yes                   52.2 
+#&gt; <span style='color: #BCBCBC;'>17</span> 465452          86.4   Cohort A <span style='color: #BB0000;'>NA</span>                No                    67.3 
+#&gt; <span style='color: #BCBCBC;'>18</span> 337310          86.5   Cohort A Completed         No                    <span style='color: #BB0000;'>NA</span>   
+#&gt; <span style='color: #BCBCBC;'>19</span> 494306          87.6   Cohort A <span style='color: #BB0000;'>NA</span>                Yes                    8.26
+#&gt; <span style='color: #BCBCBC;'>20</span> 482665          94.2   Cohort A Completed         No                    <span style='color: #BB0000;'>NA</span>   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
