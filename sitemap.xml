@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tgerke.github.io/ggswimlane/404.html</loc>
+  </url>
+  <url>
+    <loc>https://tgerke.github.io/ggswimlane/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://tgerke.github.io/ggswimlane/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://tgerke.github.io/ggswimlane/authors.html</loc>
+  </url>
+  <url>
     <loc>https://tgerke.github.io/ggswimlane/index.html</loc>
   </url>
   <url>
@@ -14,6 +26,9 @@
   </url>
   <url>
     <loc>https://tgerke.github.io/ggswimlane/reference/ggswimlane-package.html</loc>
+  </url>
+  <url>
+    <loc>https://tgerke.github.io/ggswimlane/reference/index.html</loc>
   </url>
   <url>
     <loc>https://tgerke.github.io/ggswimlane/reference/order_swimlane.html</loc>
