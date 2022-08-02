@@ -2,6 +2,7 @@
 #'
 #' @param x Typically a subject identifier
 #' @param hjust Used to adjust position in the margin
+#' @param vjust Used to adjust vertical position in the margin
 #' @param label_var Variable with the desired symbol or text annotation
 #' @param labels A named vector transforming label_var to symbols (currently not used)
 #' @param color Label colors (will accept a vector when the labels arg is activated)
@@ -33,7 +34,7 @@
 #'   theme_swimlane(legend.position = c(.8, .1)) +
 #'   ggtitle("Time on study by subject") +
 #'   ylab("Weeks on study")
-geom_swimlane_rug <- function(x, hjust = 1, label_var, labels = NULL, color = "black", ...) {
+geom_swimlane_rug <- function(x, hjust = 1, vjust = .5, label_var, labels = NULL, color = "black", ...) {
   x <- rlang::enexpr(x)
   label_var <- rlang::enexpr(label_var)
 
@@ -41,6 +42,7 @@ geom_swimlane_rug <- function(x, hjust = 1, label_var, labels = NULL, color = "b
     ggplot2::aes(x = .data[[x]], y = 0, label = .data[[label_var]]),
     color = color,
     hjust = hjust,
+    vjust = vjust,
     fill = NA,
     label.color = NA,
     label.padding = grid::unit(rep(0, 4), "pt"),

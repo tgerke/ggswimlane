@@ -4,12 +4,22 @@
 \alias{geom_swimlane_rug}
 \title{Add a rug to the right-hand margin of a swimlane}
 \usage{
-geom_swimlane_rug(x, hjust = 1, label_var, labels = NULL, color = "black", ...)
+geom_swimlane_rug(
+  x,
+  hjust = 1,
+  vjust = 0.5,
+  label_var,
+  labels = NULL,
+  color = "black",
+  ...
+)
 }
 \arguments{
 \item{x}{Typically a subject identifier}
 
 \item{hjust}{Used to adjust position in the margin}
+
+\item{vjust}{Used to adjust vertical position in the margin}
 
 \item{label_var}{Variable with the desired symbol or text annotation}
 

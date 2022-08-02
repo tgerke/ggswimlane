@@ -13,7 +13,7 @@ geom_swimlane(id_var, duration_var, cohort_var = NULL, ...)
 
 \item{cohort_var}{Optional column name to sort by cohort}
 
-\item{...}{Other options passed to}
+\item{...}{Other options passed to geom_bar}
 }
 \value{
 A ggplot2 compatible geom
