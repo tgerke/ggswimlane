@@ -1,3 +1,5 @@
+library(dplyr)
+
 # Number of patients to simulate
 n <- 20
 
@@ -35,6 +37,11 @@ patient_disposition <- dplyr::tibble(
       size = 1
     )
   ) %>%
-  ungroup()
+  ungroup() %>%
+  # Split time on study into an on-treatment phase (the remainder is
+  # follow-up); drawn last so earlier columns keep their original seed draws
+  mutate(
+    weeks_on_treatment = runif(n, min = 0.5, max = 0.9) * weeks_on_study
+  )
 
 usethis::use_data(patient_disposition, overwrite = TRUE)

@@ -5,14 +5,18 @@
 \alias{patient_disposition}
 \title{A simulated patient disposition table}
 \format{
-A data frame with 20 rows and 6 variables:
+A data frame with 20 rows and 7 variables:
 \describe{
 \item{subject}{subject identifier}
 \item{weeks_on_study}{weeks on study, as a dbl}
 \item{cohort}{study cohort}
-\item{reason_off_study}{a string describing reasons for study exit}
+\item{reason_off_study}{a string describing reason for study exit;
+\code{NA} for subjects still on study}
 \item{prior_drug}{an indicator for receipt of therapy prior to trial}
-\item{partial_response}{timing of response with units as weeks_on_study}
+\item{partial_response}{timing of response with units as weeks_on_study;
+\code{NA} for subjects without a response}
+\item{weeks_on_treatment}{weeks in the active treatment phase; the
+remainder of weeks_on_study is follow-up}
 }
 }
 \usage{
