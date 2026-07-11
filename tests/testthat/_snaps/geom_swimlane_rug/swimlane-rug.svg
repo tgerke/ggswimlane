@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<polyline points='50.84,501.18 50.84,22.78 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='206.49,501.18 206.49,22.78 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='362.13,501.18 362.13,22.78 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='517.78,501.18 517.78,22.78 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='673.43,501.18 673.43,22.78 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<rect x='50.84' y='398.67' width='311.29' height='68.34' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
+<rect x='50.84' y='284.76' width='622.59' height='68.34' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
+<rect x='50.84' y='170.86' width='155.65' height='68.34' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
+<rect x='50.84' y='56.95' width='466.94' height='68.34' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
+<circle cx='19.71' cy='318.94' r='2.49' style='stroke-width: 0.71; stroke: none; fill: #333333;' />
+<circle cx='19.71' cy='91.13' r='2.49' style='stroke-width: 0.71; stroke: none; fill: #333333;' />
+<text x='14.78' y='435.87' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>s4</text>
+<text x='14.78' y='321.96' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>s3</text>
+<text x='14.78' y='208.06' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>s2</text>
+<text x='14.78' y='94.15' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>s1</text>
+<text x='50.84' y='512.17' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='206.49' y='512.17' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='362.13' y='512.17' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='517.78' y='512.17' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='673.43' y='512.17' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='362.13' y='529.04' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='31.19px' lengthAdjust='spacingAndGlyphs'>weeks</text>
+<rect x='283.94' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
+<rect x='318.05' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
+<text x='305.99' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='5.87px' lengthAdjust='spacingAndGlyphs'>A</text>
+<text x='340.10' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='5.87px' lengthAdjust='spacingAndGlyphs'>B</text>
+<circle cx='376.53' cy='556.40' r='2.49' style='stroke-width: 0.71; stroke: none; fill: #333333;' />
+<text x='390.65' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='50.38px' lengthAdjust='spacingAndGlyphs'>Prior therapy</text>
+<text x='5.48' y='14.56' style='font-size: 13.20px; font-weight: bold; font-family: sans;' textLength='77.77px' lengthAdjust='spacingAndGlyphs'>swimlane rug</text>
+</g>
+</svg>
