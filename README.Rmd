@@ -16,48 +16,55 @@ knitr::opts_chunk$set(
 
 # ggswimlane
 
-__* Still in development__
-
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/tgerke/ggswimlane/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tgerke/ggswimlane/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-ggswimlane is a ggplot wrapper that simplifies the construction of swimlane plots, which are a common tool for showing patient trajectories through a clinical trial.
+ggswimlane is a ggplot2 extension for swimlane (swimmer) plots, a common way
+to show patient trajectories through a clinical trial: one bar per subject,
+with events, status, and baseline characteristics marked along each lane.
+Legends come for free, and the default palette and theme are ready for
+reports without further styling.
 
 ## Installation
 
-You can install the released version of ggswimlane from [GitHub](https://github.com/) with:
+You can install the development version of ggswimlane from
+[GitHub](https://github.com/tgerke/ggswimlane) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tgerke/ggswimlane")
+# install.packages("pak")
+pak::pak("tgerke/ggswimlane")
 ```
 
 ## Example
 
-```{r example, message=FALSE}
+A complete swimlane from the bundled `patient_disposition` data. Each
+`geom_swimlane_*()` layer takes bare column names, and every symbol is
+added to the legend automatically:
+
+```{r example, message=FALSE, fig.width=9, fig.height=6, fig.alt="Swimlane plot of 20 subjects colored by cohort, with shaped points marking end-of-study status, partial responses, prior therapy flags in the left margin, and arrows for subjects still on study"}
 library(dplyr)
 library(ggplot2)
 library(ggswimlane)
 
-patient_disposition %>%
+patient_disposition |>
   mutate(
-    reason_off_study = tidyr::replace_na(reason_off_study, "&#8594;"),
-    prior_drug = dplyr::case_when(
-      prior_drug == "Yes"~ "&#9658;", 
-      TRUE ~ NA_character_
-    )
-  ) %>%
-  order_swimlane(subject, weeks_on_study, cohort) %>%
+    prior_drug = if_else(prior_drug == "Yes", "Prior therapy", NA)
+  ) |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
   ggplot() +
-  geom_swimlane(subject, weeks_on_study, cohort) + 
-  ggsci::scale_fill_jco() +
-  geom_swimlane_text(subject, weeks_on_study, reason_off_study) + 
-  geom_point(
-    aes(x = subject, y = partial_response), 
-    na.rm = TRUE
-  ) + 
-  geom_swimlane_rug(x = subject, label_var = prior_drug, color = "#CD534C") + 
-  theme_swimlane(legend.position = c(.8, .1)) + 
-  ggtitle("Time on study by subject") + 
-  ylab("Weeks on study")
+  geom_swimlane(subject, weeks_on_study, cohort) +
+  geom_swimlane_status(subject, weeks_on_study, reason_off_study) +
+  geom_swimlane_marker(
+    subject, partial_response,
+    marker_label = "Partial response"
+  ) +
+  geom_swimlane_rug(subject, prior_drug) +
+  labs(title = "Time on study by subject", x = "Weeks on study") +
+  theme_swimlane()
 ```
+
+The [gallery vignette](https://tgerke.github.io/ggswimlane/articles/gallery.html)
+walks through simpler starting points, stacked treatment phases, text
+annotations, and customization.

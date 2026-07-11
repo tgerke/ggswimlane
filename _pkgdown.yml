@@ -1,1 +1,31 @@
 url: https://tgerke.github.io/ggswimlane
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Build a swimlane
+  contents:
+  - geom_swimlane
+- title: Annotate
+  contents:
+  - geom_swimlane_status
+  - geom_swimlane_marker
+  - geom_swimlane_rug
+  - geom_swimlane_label
+- title: Order data
+  contents:
+  - order_swimlane
+- title: Scales and theme
+  contents:
+  - scale_fill_swimlane
+  - theme_swimlane
+- title: Data
+  contents:
+  - patient_disposition
+
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - gallery
