@@ -2,32 +2,59 @@
 % Please edit documentation in R/geom_swimlane.R
 \name{geom_swimlane}
 \alias{geom_swimlane}
-\title{Swimlane charts}
+\title{Swimlane bars}
 \usage{
-geom_swimlane(id_var, duration_var, cohort_var = NULL, ...)
+geom_swimlane(
+  id_var,
+  duration_var,
+  fill_var = NULL,
+  width = 0.6,
+  position = ggplot2::position_stack(reverse = TRUE),
+  ...
+)
 }
 \arguments{
-\item{id_var}{Column name for subject identifier}
+\item{id_var}{Column with the subject identifier, mapped to the y-axis.
+Use \code{\link[=order_swimlane]{order_swimlane()}} first to control lane order.}
 
-\item{duration_var}{Column name for numeric length of time on study}
+\item{duration_var}{Numeric column with the bar length, mapped to the
+x-axis.}
 
-\item{cohort_var}{Optional column name to sort by cohort}
+\item{fill_var}{Optional column mapped to bar fill. With one row per
+subject this colors whole lanes (e.g. by cohort); with multiple rows per
+subject the segments stack (e.g. treatment phases).}
 
-\item{...}{Other options passed to geom_bar}
+\item{width}{Bar width.}
+
+\item{position}{Position adjustment. The default stacks segments in
+factor-level order, so the first level of \code{fill_var} starts at zero.}
+
+\item{...}{Other arguments passed to \code{\link[ggplot2:geom_col]{ggplot2::geom_col()}}.}
 }
 \value{
-A ggplot2 compatible geom
+A list of ggplot2 layers, scales, and a coord.
 }
 \description{
-A geom for swimlane plots
+The core layer of a swimlane plot: one horizontal bar per subject, with
+subjects on the y-axis and duration on the x-axis. Optionally filled by a
+grouping variable, either one row per subject (e.g. cohort) or several
+rows per subject for stacked segments (e.g. treatment phases).
+}
+\details{
+In addition to the bars, this function adds \code{\link[=scale_fill_swimlane]{scale_fill_swimlane()}} (when
+\code{fill_var} is supplied), \code{\link[=scale_shape_swimlane]{scale_shape_swimlane()}} (shared by the
+annotation layers such as \code{\link[=geom_swimlane_status]{geom_swimlane_status()}}), and
+\code{\link[ggplot2:coord_cartesian]{ggplot2::coord_cartesian()}} with \code{clip = "off"} so annotations may extend
+into the plot margins. Adding your own fill or shape scale replaces the
+built-in one; ggplot2 will print its standard message when that happens.
 }
 \examples{
 library(ggplot2)
 
-patient_disposition \%>\%
-  order_swimlane(subject, weeks_on_study, cohort) \%>\%
+patient_disposition |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
-  theme_swimlane(legend.position = c(.9, .1)) +
-  ylab("Weeks on study")
+  labs(x = "Weeks on study") +
+  theme_swimlane()
 }

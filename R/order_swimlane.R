@@ -1,40 +1,53 @@
 #' Order a tibble for swimlane plotting
 #'
-#' Assigns factor levels to an identifying key in a tibble (often subject ID)
-#' by a second variable (often study duration), with the option to perform
-#' this sorting within groups. Most often used before a call to ggplot() +
-#' geom_swimlane()
+#' Relevels an identifying column (often subject ID) as a factor ordered by a
+#' second variable (often study duration), with the option to perform this
+#' sorting within groups. Run before [ggplot2::ggplot()] +
+#' [geom_swimlane()] so lanes appear shortest-to-longest from the bottom up.
 #'
-#' @param .data A tibble or data.frame
-#' @param id_var Row (often subject) ID
-#' @param order_by Variable to sort by, often time on study
-#' @param order_within Variable to sort within, often cohort
+#' @param .data A tibble or data.frame.
+#' @param id_var Row (often subject) ID; releveled in place.
+#' @param order_by Numeric variable to sort by, often time on study.
+#' @param order_within Optional variable to sort within, often cohort.
 #'
-#' @return A tibble with `id_var` as a releveled factor
+#' @return `.data` with `id_var` releveled as an ordered factor.
 #' @export
 #'
 #' @examples
-#' patient_disposition %>%
+#' patient_disposition |>
 #'   order_swimlane(subject, weeks_on_study, cohort)
 order_swimlane <- function(.data, id_var, order_by, order_within = NULL) {
+  id_sym <- rlang::ensym(id_var)
+  by_quo <- rlang::enquo(order_by)
+  within_quo <- rlang::enquo(order_within)
 
-  id_var <- rlang::enexpr(id_var)
-  order_by <- rlang::enexpr(order_by)
-  order_within <- rlang::enexpr(order_within)
+  cols <- c(
+    rlang::as_name(id_sym),
+    quo_col_name(by_quo),
+    if (!rlang::quo_is_null(within_quo)) quo_col_name(within_quo)
+  )
+  check_swimlane_cols(.data, cols, "order_swimlane")
 
-  # Sort without cohorts
-  if(rlang::is_null(order_within)) {
+  if (!is.numeric(dplyr::pull(.data, {{ order_by }}))) {
+    cli::cli_abort(
+      "{.arg order_by} must be a numeric column.",
+      call = NULL
+    )
+  }
+
+  # Sort without groups
+  if (rlang::quo_is_null(within_quo)) {
     return(
-      .data %>%
+      .data |>
         dplyr::mutate(
-          subject = reorder(factor(.data[[id_var]]), .data[[order_by]])
+          !!id_sym := stats::reorder(factor(!!id_sym), {{ order_by }})
         )
     )
   }
 
-  .data %>%
-    dplyr::arrange(dplyr::desc(.data[[order_within]]), .data[[order_by]]) %>%
+  .data |>
+    dplyr::arrange(dplyr::desc({{ order_within }}), {{ order_by }}) |>
     dplyr::mutate(
-      subject = stats::reorder(factor(.data[[id_var]]), dplyr::row_number())
+      !!id_sym := stats::reorder(factor(!!id_sym), dplyr::row_number())
     )
 }

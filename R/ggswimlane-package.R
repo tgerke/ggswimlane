@@ -2,7 +2,6 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom rlang .data
-#' @importFrom stats reorder
+#' @importFrom rlang .data :=
 ## usethis namespace: end
 NULL

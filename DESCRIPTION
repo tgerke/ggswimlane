@@ -1,31 +1,35 @@
 Package: ggswimlane
 Title: Create Clinical Trial Swimlanes with ggplot
-Version: 0.0.0.9000
-Authors@R: 
+Version: 0.1.0
+Authors@R:
     person(given = "Travis",
            family = "Gerke",
            role = c("aut", "cre"),
            email = "tgerke@mail.harvard.edu",
            comment = c(ORCID = "0000-0002-9500-8907"))
 Description: ggswimlane is a ggplot wrapper that simplifies the construction
-    of swimlane plots, which are a common tool for showing patient 
+    of swimlane plots, which are a common tool for showing patient
     trajectories through a clinical trial.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
-Imports: 
+Imports:
+    cli,
     dplyr,
-    ggplot2,
-    ggtext,
-    lubridate,
-    magrittr,
+    ggplot2 (>= 3.5.0),
     rlang,
     stats
-Depends: 
-    R (>= 2.10)
+Depends:
+    R (>= 4.1)
 LazyData: true
-Suggests: 
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
     tidyr,
-    ggsci
-URL: https://tgerke.github.io/ggswimlane
+    vdiffr
+Config/testthat/edition: 3
+URL: https://tgerke.github.io/ggswimlane, https://github.com/tgerke/ggswimlane
+BugReports: https://github.com/tgerke/ggswimlane/issues
+VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

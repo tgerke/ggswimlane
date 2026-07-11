@@ -7,24 +7,24 @@
 order_swimlane(.data, id_var, order_by, order_within = NULL)
 }
 \arguments{
-\item{.data}{A tibble or data.frame}
+\item{.data}{A tibble or data.frame.}
 
-\item{id_var}{Row (often subject) ID}
+\item{id_var}{Row (often subject) ID; releveled in place.}
 
-\item{order_by}{Variable to sort by, often time on study}
+\item{order_by}{Numeric variable to sort by, often time on study.}
 
-\item{order_within}{Variable to sort within, often cohort}
+\item{order_within}{Optional variable to sort within, often cohort.}
 }
 \value{
-A tibble with \code{id_var} as a releveled factor
+\code{.data} with \code{id_var} releveled as an ordered factor.
 }
 \description{
-Assigns factor levels to an identifying key in a tibble (often subject ID)
-by a second variable (often study duration), with the option to perform
-this sorting within groups. Most often used before a call to ggplot() +
-geom_swimlane()
+Relevels an identifying column (often subject ID) as a factor ordered by a
+second variable (often study duration), with the option to perform this
+sorting within groups. Run before \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} +
+\code{\link[=geom_swimlane]{geom_swimlane()}} so lanes appear shortest-to-longest from the bottom up.
 }
 \examples{
-patient_disposition \%>\%
+patient_disposition |>
   order_swimlane(subject, weeks_on_study, cohort)
 }
