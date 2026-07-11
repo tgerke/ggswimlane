@@ -4,25 +4,33 @@
 \alias{theme_swimlane}
 \title{A ggplot theme for swimlane plots}
 \usage{
-theme_swimlane(extra_margin_r = 15, ...)
+theme_swimlane(base_size = 11, extra_margin_r = 10, ...)
 }
 \arguments{
-\item{extra_margin_r}{Number (of pt units) to add to right margin, most
-often to account for text annotations}
+\item{base_size}{Base font size in pts, passed to
+\code{\link[ggplot2:theme_minimal]{ggplot2::theme_minimal()}}.}
 
-\item{...}{Further arguments to ggplot2::theme()}
+\item{extra_margin_r}{Extra right margin in pts, to make room for
+annotations that extend past the last bar (e.g. \code{\link[=geom_swimlane_label]{geom_swimlane_label()}}).}
+
+\item{...}{Further arguments passed to \code{\link[ggplot2:theme]{ggplot2::theme()}}, overriding the
+defaults set here. For an inside legend, use
+\verb{legend.position = "inside", legend.position.inside = c(x, y)}.}
+}
+\value{
+A ggplot2 theme object.
 }
 \description{
-A ggplot theme for swimlane plots
+A minimal horizontal-bar theme: no lane gridlines, light vertical
+gridlines, no y-axis title, and legends along the bottom. Legend titles
+are suppressed since swimlane legends (cohort fills, event symbols) are
+typically self-explanatory; restore them via \code{...} if needed.
 }
 \examples{
 library(ggplot2)
 
-patient_disposition \%>\%
-  order_swimlane(subject, weeks_on_study, cohort) \%>\%
-  ggplot() +
+ggplot(patient_disposition) +
   geom_swimlane(subject, weeks_on_study, cohort) +
-  ggsci::scale_fill_jco() +
-  theme_swimlane(legend.position = c(.8, .1))  \%+replace\%
-  theme(axis.title.x = element_blank())
+  labs(x = "Weeks on study") +
+  theme_swimlane()
 }

@@ -2,58 +2,44 @@
 % Please edit documentation in R/geom_swimlane_rug.R
 \name{geom_swimlane_rug}
 \alias{geom_swimlane_rug}
-\title{Add a rug to the right-hand margin of a swimlane}
+\title{Mark baseline characteristics in the left margin of a swimlane}
 \usage{
-geom_swimlane_rug(
-  x,
-  hjust = 1,
-  vjust = 0.5,
-  label_var,
-  labels = NULL,
-  color = "black",
-  ...
-)
+geom_swimlane_rug(id_var, rug_var, size = 2, colour = "grey20", ...)
 }
 \arguments{
-\item{x}{Typically a subject identifier}
+\item{id_var}{Column with the subject identifier, mapped to the y-axis.}
 
-\item{hjust}{Used to adjust position in the margin}
+\item{rug_var}{Column with the legend label for flagged subjects and \code{NA}
+otherwise, mapped to shape.}
 
-\item{vjust}{Used to adjust vertical position in the margin}
+\item{size}{Point size.}
 
-\item{label_var}{Variable with the desired symbol or text annotation}
+\item{colour}{Point color.}
 
-\item{labels}{A named vector transforming label_var to symbols (currently not used)}
-
-\item{color}{Label colors (will accept a vector when the labels arg is activated)}
-
-\item{...}{Further arguments to ggtext::geom_richtext()}
+\item{...}{Other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+}
+\value{
+A list containing a ggplot2 layer.
 }
 \description{
-Add a rug to the right-hand margin of a swimlane
+Draws a shaped point at the start of each lane, in the margin to the left
+of the bars, typically flagging a baseline characteristic such as prior
+therapy. The shape mapping generates a legend entry automatically.
+Subjects with \code{NA} in \code{rug_var} are skipped, so recode indicator columns
+to a legend label or \code{NA}, e.g.
+\code{dplyr::if_else(prior_drug == "Yes", "Prior therapy", NA)}.
 }
 \examples{
 library(ggplot2)
 
-patient_disposition \%>\%
+patient_disposition |>
   dplyr::mutate(
-    reason_off_study = tidyr::replace_na(reason_off_study, "&#8594;"),
-    prior_drug = dplyr::case_when(
-      prior_drug == "Yes"~ "&#9658;",
-      TRUE ~ NA_character_
-    )
-  ) \%>\%
-  order_swimlane(subject, weeks_on_study, cohort) \%>\%
+    prior_drug = dplyr::if_else(prior_drug == "Yes", "Prior therapy", NA)
+  ) |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
-  ggsci::scale_fill_jco() +
-  geom_swimlane_text(subject, weeks_on_study, reason_off_study) +
-  geom_point(
-    aes(x = subject, y = partial_response),
-    na.rm = TRUE
-  ) +
-  geom_swimlane_rug(x = subject, label_var = prior_drug, color = "#CD534C") +
-  theme_swimlane(legend.position = c(.8, .1)) +
-  ggtitle("Time on study by subject") +
-  ylab("Weeks on study")
+  geom_swimlane_rug(subject, prior_drug) +
+  labs(x = "Weeks on study") +
+  theme_swimlane()
 }
