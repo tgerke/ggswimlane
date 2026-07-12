@@ -61,8 +61,11 @@ entry.</p>
 <span>  <span class="va">status_var</span>,</span>
 <span>  ongoing <span class="op">=</span> <span class="st">"On study"</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  size <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">2.8</span>,</span>
 <span>  colour <span class="op">=</span> <span class="st">"grey20"</span>,</span>
+<span>  fill <span class="op">=</span> <span class="va">colour</span>,</span>
+<span>  stroke <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  halo <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,15 +100,31 @@ as a regular status level in the shape legend.</p></dd>
 
 
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
-<dd><p>Point size; the ongoing arrow is drawn at <code>1.6 * size</code>.</p></dd>
+<dd><p>Point size; the ongoing arrow is scaled to match.</p></dd>
 
 
 <dt id="arg-colour">colour<a class="anchor" aria-label="anchor" href="#arg-colour"></a></dt>
-<dd><p>Point color.</p></dd>
+<dd><p>Point color, used for both the outline and (by default) the
+fill of the glyph, and for the ongoing arrow.</p></dd>
+
+
+<dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
+<dd><p>Fill color for the solid glyphs (shapes 21-25). Defaults to
+<code>colour</code>.</p></dd>
+
+
+<dt id="arg-stroke">stroke<a class="anchor" aria-label="anchor" href="#arg-stroke"></a></dt>
+<dd><p>Outline width of the glyph.</p></dd>
+
+
+<dt id="arg-halo">halo<a class="anchor" aria-label="anchor" href="#arg-halo"></a></dt>
+<dd><p>Color of the ring drawn beneath each status glyph, separating
+it from the bar fill. Use <code>NA</code> to disable (e.g. on dark backgrounds).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Other arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">ggplot2::geom_point()</a></code>.</p></dd>
+<dd><p>Other arguments passed to the <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">ggplot2::geom_point()</a></code> status
+layer.</p></dd>
 
 </dl></div>
     <div class="section level2">

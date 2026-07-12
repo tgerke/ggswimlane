@@ -13,8 +13,11 @@ geom_swimlane_marker(
   time_var,
   marker_var = NULL,
   marker_label = NULL,
-  size = 2.5,
+  size = 2.8,
   colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
   ...
 )
 ```
@@ -46,7 +49,21 @@ geom_swimlane_marker(
 
 - colour:
 
-  Point color.
+  Point color, used for both the outline and (by default) the fill of
+  the glyph.
+
+- fill:
+
+  Fill color for the solid glyphs (shapes 21-25). Defaults to `colour`.
+
+- stroke:
+
+  Outline width of the glyph.
+
+- halo:
+
+  Color of the ring drawn beneath each glyph, separating it from the bar
+  fill. Use `NA` to disable (e.g. on dark backgrounds).
 
 - ...:
 

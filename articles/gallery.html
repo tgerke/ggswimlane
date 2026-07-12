@@ -177,13 +177,13 @@ levels would reshuffle them: this plot has no partial responses, and
 each status to its shape with a named <code>values</code> vector:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">status_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Adverse event"</span> <span class="op">=</span> <span class="fl">16</span>,</span>
-<span>  <span class="st">"Completed"</span> <span class="op">=</span> <span class="fl">17</span>,</span>
-<span>  <span class="st">"Disease progression"</span> <span class="op">=</span> <span class="fl">15</span>,</span>
-<span>  <span class="st">"Partial response"</span> <span class="op">=</span> <span class="fl">18</span>,</span>
-<span>  <span class="st">"Physician decision"</span> <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  <span class="st">"Prior therapy"</span> <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  <span class="st">"Withdrawal by subject"</span> <span class="op">=</span> <span class="fl">5</span></span>
+<span>  <span class="st">"Adverse event"</span> <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>  <span class="st">"Completed"</span> <span class="op">=</span> <span class="fl">24</span>,</span>
+<span>  <span class="st">"Disease progression"</span> <span class="op">=</span> <span class="fl">22</span>,</span>
+<span>  <span class="st">"Partial response"</span> <span class="op">=</span> <span class="fl">23</span>,</span>
+<span>  <span class="st">"Physician decision"</span> <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  <span class="st">"Prior therapy"</span> <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="st">"Withdrawal by subject"</span> <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
@@ -249,6 +249,27 @@ through <code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></c
 <span>    legend.position.inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.15</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/custom-1.png" class="r-plt" alt="Swimlane plot with a green and orange Dark2 palette and the cohort legend placed inside the panel at the lower right" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="fonts">Fonts<a class="anchor" aria-label="anchor" href="#fonts"></a>
+</h2>
+<p><code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></code> deliberately sets no font family, so
+plots use your graphics device’s default and render the same everywhere.
+To use a house font, pass any installed font’s name as
+<code>base_family</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/order_swimlane.html">order_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Atkinson Hyperlegible"</span><span class="op">)</span></span></code></pre></div>
+<p>Font lookup depends on the graphics device. The <a href="https://ragg.r-lib.org" class="external-link">ragg</a> devices resolve any font
+installed on your system by name; in R Markdown or Quarto, set the chunk
+option <code>dev = "ragg_png"</code>. The base <code><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf()</a></code> device
+only knows a handful of built-in typefaces, so for PDF output use
+<code>dev = "cairo_pdf"</code> instead.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

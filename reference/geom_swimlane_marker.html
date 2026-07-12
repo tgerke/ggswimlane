@@ -57,8 +57,11 @@ response). Subjects with <code>NA</code> in <code>time_var</code> are skipped. S
 <span>  <span class="va">time_var</span>,</span>
 <span>  marker_var <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  marker_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  size <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">2.8</span>,</span>
 <span>  colour <span class="op">=</span> <span class="st">"grey20"</span>,</span>
+<span>  fill <span class="op">=</span> <span class="va">colour</span>,</span>
+<span>  stroke <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  halo <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -91,7 +94,22 @@ event types. Cannot be combined with <code>marker_label</code>.</p></dd>
 
 
 <dt id="arg-colour">colour<a class="anchor" aria-label="anchor" href="#arg-colour"></a></dt>
-<dd><p>Point color.</p></dd>
+<dd><p>Point color, used for both the outline and (by default) the
+fill of the glyph.</p></dd>
+
+
+<dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
+<dd><p>Fill color for the solid glyphs (shapes 21-25). Defaults to
+<code>colour</code>.</p></dd>
+
+
+<dt id="arg-stroke">stroke<a class="anchor" aria-label="anchor" href="#arg-stroke"></a></dt>
+<dd><p>Outline width of the glyph.</p></dd>
+
+
+<dt id="arg-halo">halo<a class="anchor" aria-label="anchor" href="#arg-halo"></a></dt>
+<dd><p>Color of the ring drawn beneath each glyph, separating it from
+the bar fill. Use <code>NA</code> to disable (e.g. on dark backgrounds).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

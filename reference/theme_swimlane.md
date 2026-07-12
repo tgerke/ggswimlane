@@ -8,7 +8,7 @@ typically self-explanatory; restore them via `...` if needed.
 ## Usage
 
 ``` r
-theme_swimlane(base_size = 11, extra_margin_r = 10, ...)
+theme_swimlane(base_size = 11, base_family = "", extra_margin_r = 10, ...)
 ```
 
 ## Arguments
@@ -17,6 +17,13 @@ theme_swimlane(base_size = 11, extra_margin_r = 10, ...)
 
   Base font size in pts, passed to
   [`ggplot2::theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+- base_family:
+
+  Base font family, passed to
+  [`ggplot2::theme_minimal()`](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+  The default `""` uses the graphics device's default font, which works
+  on every system; pass an installed font's name to use a house font.
 
 - extra_margin_r:
 

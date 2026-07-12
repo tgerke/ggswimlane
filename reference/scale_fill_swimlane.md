@@ -2,7 +2,9 @@
 
 Color and fill scales built on a reordered [Okabe-Ito
 palette](https://jfly.uni-koeln.de/color/) (colorblind-safe, 8 colors),
-and a shape scale of legible closed symbols (8 shapes, solid first).
+and a shape scale of legible symbols (8 shapes, solid first). The fill
+scale uses a slight tint of the palette so that dark event markers stand
+out against the bars; the color scale keeps the full-strength hues.
 These are applied automatically by
 [`geom_swimlane()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane.md);
 use them directly to style additional layers, or replace them with any

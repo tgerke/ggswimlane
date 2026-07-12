@@ -41,6 +41,25 @@ release: plots built against 0.0.0.9000 will need updates.
 - The default shape palette uses closed symbols only (solid first, then
   open outlines). The line-only glyphs (`+`, `x`, `*`) are gone: drawn
   at the end of a bar, their strokes read as arrow shafts or error bars.
+- [`geom_swimlane_status()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_status.md),
+  [`geom_swimlane_marker()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_marker.md),
+  and
+  [`geom_swimlane_rug()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_rug.md)
+  draw a white halo ring beneath each glyph so that markers separate
+  cleanly from the bars; a new `halo` argument controls the ring color
+  (`NA` disables it), and new `fill` and `stroke` arguments style the
+  glyphs themselves. The solid glyphs are now the fillable shapes 21-25,
+  and the ongoing arrow in
+  [`geom_swimlane_status()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_status.md)
+  is a solid arrowhead instead of a thin line arrow.
+- [`scale_fill_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  fills bars with a slight tint of the Okabe-Ito palette so the
+  near-black markers stay dominant;
+  [`scale_colour_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  keeps the full-strength hues.
+- [`theme_swimlane()`](https://tgerke.github.io/ggswimlane/reference/theme_swimlane.md)
+  gains a `base_family` argument for setting a font family; the gallery
+  vignette documents font handling across graphics devices.
 - [`scale_shape_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
   gains a `values` argument. Shapes otherwise assign in factor-level
   order, so pass a named vector to pin each status to the same shape

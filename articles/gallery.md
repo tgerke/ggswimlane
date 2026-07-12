@@ -138,13 +138,13 @@ each status to its shape with a named `values` vector:
 ``` r
 
 status_shapes <- c(
-  "Adverse event" = 16,
-  "Completed" = 17,
-  "Disease progression" = 15,
-  "Partial response" = 18,
-  "Physician decision" = 1,
-  "Prior therapy" = 0,
-  "Withdrawal by subject" = 5
+  "Adverse event" = 21,
+  "Completed" = 24,
+  "Disease progression" = 22,
+  "Partial response" = 23,
+  "Physician decision" = 25,
+  "Prior therapy" = 1,
+  "Withdrawal by subject" = 0
 )
 
 patient_disposition |>
@@ -226,3 +226,29 @@ patient_disposition |>
 ![Swimlane plot with a green and orange Dark2 palette and the cohort
 legend placed inside the panel at the lower
 right](gallery_files/figure-html/custom-1.png)
+
+## Fonts
+
+[`theme_swimlane()`](https://tgerke.github.io/ggswimlane/reference/theme_swimlane.md)
+deliberately sets no font family, so plots use your graphics device’s
+default and render the same everywhere. To use a house font, pass any
+installed font’s name as `base_family`:
+
+``` r
+
+patient_disposition |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
+  labs(x = "Weeks on study") +
+  theme_swimlane(base_family = "Atkinson Hyperlegible")
+```
+
+Font lookup depends on the graphics device. The
+[ragg](https://ragg.r-lib.org) devices resolve any font installed on
+your system by name; in R Markdown or Quarto, set the chunk option
+`dev = "ragg_png"`. The base
+[`pdf()`](https://rdrr.io/r/grDevices/pdf.html) device only knows a
+handful of built-in typefaces, so for PDF output use `dev = "cairo_pdf"`
+instead.

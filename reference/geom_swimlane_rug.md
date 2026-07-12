@@ -10,7 +10,16 @@ to a legend label or `NA`, e.g.
 ## Usage
 
 ``` r
-geom_swimlane_rug(id_var, rug_var, size = 2, colour = "grey20", ...)
+geom_swimlane_rug(
+  id_var,
+  rug_var,
+  size = 2.3,
+  colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
+  ...
+)
 ```
 
 ## Arguments
@@ -30,7 +39,21 @@ geom_swimlane_rug(id_var, rug_var, size = 2, colour = "grey20", ...)
 
 - colour:
 
-  Point color.
+  Point color, used for both the outline and (by default) the fill of
+  the glyph.
+
+- fill:
+
+  Fill color for the solid glyphs (shapes 21-25). Defaults to `colour`.
+
+- stroke:
+
+  Outline width of the glyph.
+
+- halo:
+
+  Color of the ring drawn beneath each glyph. Use `NA` to disable (e.g.
+  on dark backgrounds).
 
 - ...:
 

@@ -15,8 +15,11 @@ geom_swimlane_status(
   status_var,
   ongoing = "On study",
   arrow = TRUE,
-  size = 2.5,
+  size = 2.8,
   colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
   ...
 )
 ```
@@ -48,16 +51,31 @@ geom_swimlane_status(
 
 - size:
 
-  Point size; the ongoing arrow is drawn at `1.6 * size`.
+  Point size; the ongoing arrow is scaled to match.
 
 - colour:
 
-  Point color.
+  Point color, used for both the outline and (by default) the fill of
+  the glyph, and for the ongoing arrow.
+
+- fill:
+
+  Fill color for the solid glyphs (shapes 21-25). Defaults to `colour`.
+
+- stroke:
+
+  Outline width of the glyph.
+
+- halo:
+
+  Color of the ring drawn beneath each status glyph, separating it from
+  the bar fill. Use `NA` to disable (e.g. on dark backgrounds).
 
 - ...:
 
-  Other arguments passed to
-  [`ggplot2::geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html).
+  Other arguments passed to the
+  [`ggplot2::geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
+  status layer.
 
 ## Value
 

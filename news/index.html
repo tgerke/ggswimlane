@@ -52,6 +52,12 @@
 <li>Plots now look polished without additional scales: <code><a href="../reference/geom_swimlane.html">geom_swimlane()</a></code> applies built-in colorblind-safe fill and shape scales (Okabe-Ito colors; <code><a href="../reference/scale_fill_swimlane.html">scale_fill_swimlane()</a></code>, <code><a href="../reference/scale_fill_swimlane.html">scale_colour_swimlane()</a></code>, <code><a href="../reference/scale_fill_swimlane.html">scale_shape_swimlane()</a></code> are also exported), and <code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></code> was redesigned with a bottom legend default.</li>
 <li>The default shape palette uses closed symbols only (solid first, then open outlines). The line-only glyphs (<code>+</code>, <code>x</code>, <code>*</code>) are gone: drawn at the end of a bar, their strokes read as arrow shafts or error bars.</li>
 <li>
+<code><a href="../reference/geom_swimlane_status.html">geom_swimlane_status()</a></code>, <code><a href="../reference/geom_swimlane_marker.html">geom_swimlane_marker()</a></code>, and <code><a href="../reference/geom_swimlane_rug.html">geom_swimlane_rug()</a></code> draw a white halo ring beneath each glyph so that markers separate cleanly from the bars; a new <code>halo</code> argument controls the ring color (<code>NA</code> disables it), and new <code>fill</code> and <code>stroke</code> arguments style the glyphs themselves. The solid glyphs are now the fillable shapes 21-25, and the ongoing arrow in <code><a href="../reference/geom_swimlane_status.html">geom_swimlane_status()</a></code> is a solid arrowhead instead of a thin line arrow.</li>
+<li>
+<code><a href="../reference/scale_fill_swimlane.html">scale_fill_swimlane()</a></code> fills bars with a slight tint of the Okabe-Ito palette so the near-black markers stay dominant; <code><a href="../reference/scale_fill_swimlane.html">scale_colour_swimlane()</a></code> keeps the full-strength hues.</li>
+<li>
+<code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></code> gains a <code>base_family</code> argument for setting a font family; the gallery vignette documents font handling across graphics devices.</li>
+<li>
 <code><a href="../reference/scale_fill_swimlane.html">scale_shape_swimlane()</a></code> gains a <code>values</code> argument. Shapes otherwise assign in factor-level order, so pass a named vector to pin each status to the same shape across plots.</li>
 <li>All user-facing functions validate their column arguments and error informatively.</li>
 </ul></div>
