@@ -1,0 +1,102 @@
+# ggswimlane
+
+ggswimlane is a ggplot2 extension for swimlane (swimmer) plots, a common
+way to show patient trajectories through a clinical trial: one bar per
+subject, with events, status, and baseline characteristics marked along
+each lane. Legends come for free, and the default palette and theme are
+ready for reports without further styling.
+
+## Installation
+
+You can install the development version of ggswimlane from
+[GitHub](https://github.com/tgerke/ggswimlane) with:
+
+``` r
+
+# install.packages("pak")
+pak::pak("tgerke/ggswimlane")
+```
+
+## Example
+
+A complete swimlane from the bundled `patient_disposition` data. Each
+`geom_swimlane_*()` layer takes bare column names, and every symbol is
+added to the legend automatically:
+
+``` r
+
+library(dplyr)
+library(ggplot2)
+library(ggswimlane)
+
+patient_disposition |>
+  mutate(
+    prior_drug = if_else(prior_drug == "Yes", "Prior therapy", NA)
+  ) |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) +
+  geom_swimlane_status(subject, weeks_on_study, reason_off_study) +
+  geom_swimlane_marker(
+    subject, partial_response,
+    marker_label = "Partial response"
+  ) +
+  geom_swimlane_rug(subject, prior_drug) +
+  labs(title = "Time on study by subject", x = "Weeks on study") +
+  theme_swimlane()
+```
+
+![Swimlane plot of 20 subjects colored by cohort, with shaped points
+marking end-of-study status, partial responses, prior therapy flags in
+the left margin, and arrows for subjects still on
+study](reference/figures/README-example-1.png)
+
+The [gallery
+vignette](https://tgerke.github.io/ggswimlane/articles/gallery.html)
+walks through simpler starting points, stacked treatment phases, text
+annotations, and customization.
+
+# Package index
+
+## Build a swimlane
+
+- [`geom_swimlane()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane.md)
+  : Swimlane bars
+
+## Annotate
+
+- [`geom_swimlane_status()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_status.md)
+  : Mark end-of-lane status with shaped points
+- [`geom_swimlane_marker()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_marker.md)
+  : Mark on-lane events with shaped points
+- [`geom_swimlane_rug()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_rug.md)
+  : Mark baseline characteristics in the left margin of a swimlane
+- [`geom_swimlane_label()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_label.md)
+  : Add text to the end of each swimlane bar
+
+## Order data
+
+- [`order_swimlane()`](https://tgerke.github.io/ggswimlane/reference/order_swimlane.md)
+  : Order a tibble for swimlane plotting
+
+## Scales and theme
+
+- [`scale_fill_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  [`scale_colour_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  [`scale_color_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  [`scale_shape_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  : Discrete scales for swimlane plots
+- [`theme_swimlane()`](https://tgerke.github.io/ggswimlane/reference/theme_swimlane.md)
+  : A ggplot theme for swimlane plots
+
+## Data
+
+- [`patient_disposition`](https://tgerke.github.io/ggswimlane/reference/patient_disposition.md)
+  : A simulated patient disposition table
+
+# Articles
+
+### Articles
+
+- [Swimlane
+  gallery](https://tgerke.github.io/ggswimlane/articles/gallery.md):
