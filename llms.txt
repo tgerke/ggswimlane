@@ -42,6 +42,7 @@ patient_disposition |>
     marker_label = "Partial response"
   ) +
   geom_swimlane_rug(subject, prior_drug) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(title = "Time on study by subject", x = "Weeks on study") +
   theme_swimlane()
 ```

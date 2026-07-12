@@ -38,6 +38,13 @@ release: plots built against 0.0.0.9000 will need updates.
   are also exported), and
   [`theme_swimlane()`](https://tgerke.github.io/ggswimlane/reference/theme_swimlane.md)
   was redesigned with a bottom legend default.
+- The default shape palette uses closed symbols only (solid first, then
+  open outlines). The line-only glyphs (`+`, `x`, `*`) are gone: drawn
+  at the end of a bar, their strokes read as arrow shafts or error bars.
+- [`scale_shape_swimlane()`](https://tgerke.github.io/ggswimlane/reference/scale_fill_swimlane.md)
+  gains a `values` argument. Shapes otherwise assign in factor-level
+  order, so pass a named vector to pin each status to the same shape
+  across plots.
 - All user-facing functions validate their column arguments and error
   informatively.
 

@@ -46,7 +46,9 @@ draws one bar per subject.
 [`order_swimlane()`](https://tgerke.github.io/ggswimlane/reference/order_swimlane.md)
 relevels the subject column first so lanes run shortest to longest, and
 [`theme_swimlane()`](https://tgerke.github.io/ggswimlane/reference/theme_swimlane.md)
-supplies the finished look:
+supplies the finished look. Time axes read best with breaks at
+protocol-meaningful intervals, so every example here sets 12-week breaks
+rather than accepting the ggplot2 defaults:
 
 ``` r
 
@@ -54,6 +56,7 @@ patient_disposition |>
   order_swimlane(subject, weeks_on_study) |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(x = "Weeks on study") +
   theme_swimlane()
 ```
@@ -71,6 +74,7 @@ patient_disposition |>
   order_swimlane(subject, weeks_on_study, cohort) |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(x = "Weeks on study") +
   theme_swimlane()
 ```
@@ -107,6 +111,7 @@ patient_disposition |>
     marker_label = "Partial response"
   ) +
   geom_swimlane_rug(subject, prior_drug) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(title = "Time on study by subject", x = "Weeks on study") +
   theme_swimlane()
 ```
@@ -122,9 +127,25 @@ With one row per subject and phase, bar segments stack in factor-level
 order. Here each lane splits into treatment and follow-up phases; note
 that
 [`order_swimlane()`](https://tgerke.github.io/ggswimlane/reference/order_swimlane.md)
-runs before pivoting so lanes stay ordered by total duration:
+runs before pivoting so lanes stay ordered by total duration.
+
+Shapes assign in factor-level order, so a plot with different status
+levels would reshuffle them: this plot has no partial responses, and
+“Physician decision” would silently inherit the diamond that meant
+“Partial response” above. When a document has several swimlanes, pin
+each status to its shape with a named `values` vector:
 
 ``` r
+
+status_shapes <- c(
+  "Adverse event" = 16,
+  "Completed" = 17,
+  "Disease progression" = 15,
+  "Partial response" = 18,
+  "Physician decision" = 1,
+  "Prior therapy" = 0,
+  "Withdrawal by subject" = 5
+)
 
 patient_disposition |>
   order_swimlane(subject, weeks_on_study, cohort) |>
@@ -140,34 +161,44 @@ patient_disposition |>
   ggplot() +
   geom_swimlane(subject, weeks, phase) +
   geom_swimlane_status(subject, weeks_on_study, reason_off_study) +
+  scale_shape_swimlane(
+    values = status_shapes,
+    guide = guide_legend(order = 3, nrow = 2)
+  ) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(title = "Treatment and follow-up phases", x = "Weeks on study") +
   theme_swimlane()
 ```
 
 ![Swimlane plot where each bar is split into a blue treatment segment
-followed by an orange follow-up
-segment](gallery_files/figure-html/stacked-1.png)
+followed by an orange follow-up segment, with the same status shapes as
+the previous figure](gallery_files/figure-html/stacked-1.png)
 
 ## Text annotations
 
 Prefer text over symbols?
 [`geom_swimlane_label()`](https://tgerke.github.io/ggswimlane/reference/geom_swimlane_label.md)
-writes each status past the end of its bar. Widen the right margin to
+writes each status past the end of its bar. Subjects with `NA` are
+skipped, which would leave ongoing subjects indistinguishable from
+missing data, so recode them to a label first. Widen the right margin to
 make room:
 
 ``` r
 
 patient_disposition |>
+  mutate(reason_off_study = coalesce(reason_off_study, "On study")) |>
   order_swimlane(subject, weeks_on_study, cohort) |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
   geom_swimlane_label(subject, weeks_on_study, reason_off_study) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(x = "Weeks on study") +
   theme_swimlane(extra_margin_r = 60)
 ```
 
-![Swimlane plot with each subject's reason off study written as text
-just past the end of its bar](gallery_files/figure-html/labels-1.png)
+![Swimlane plot with each subject's status, including On study, written
+as text just past the end of its
+bar](gallery_files/figure-html/labels-1.png)
 
 ## Customization
 
@@ -183,6 +214,7 @@ patient_disposition |>
   ggplot() +
   geom_swimlane(subject, weeks_on_study, cohort) +
   scale_fill_brewer(palette = "Dark2") +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
   labs(x = "Weeks on study") +
   theme_swimlane(
     base_size = 12,

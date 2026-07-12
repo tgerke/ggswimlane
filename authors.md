@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/tgerke/ggswimlane/blob/v0.1.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/tgerke/ggswimlane/blob/main/DESCRIPTION)
 
 Gerke T (2026). *ggswimlane: Create Clinical Trial Swimlanes with
 ggplot*. R package version 0.1.0, <https://tgerke.github.io/ggswimlane>.

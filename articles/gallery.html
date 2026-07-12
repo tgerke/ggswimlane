@@ -59,7 +59,7 @@
       <h1>Swimlane gallery</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tgerke/ggswimlane/blob/v0.1.0/vignettes/gallery.Rmd" class="external-link"><code>vignettes/gallery.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tgerke/ggswimlane/blob/main/vignettes/gallery.Rmd" class="external-link"><code>vignettes/gallery.Rmd</code></a></small>
       <div class="d-none name"><code>gallery.Rmd</code></div>
     </div>
 
@@ -103,12 +103,15 @@ simulated disposition table for 20 trial participants.</p>
 <p><code><a href="../reference/geom_swimlane.html">geom_swimlane()</a></code> draws one bar per subject.
 <code><a href="../reference/order_swimlane.html">order_swimlane()</a></code> relevels the subject column first so lanes
 run shortest to longest, and <code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></code> supplies the
-finished look:</p>
+finished look. Time axes read best with breaks at protocol-meaningful
+intervals, so every example here sets 12-week breaks rather than
+accepting the ggplot2 defaults:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/order_swimlane.html">order_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/basic-1.png" class="r-plt" alt="Swimlane plot of 20 subjects with blue bars ordered shortest to longest from the bottom" width="100%"></p>
@@ -119,6 +122,7 @@ to <code><a href="../reference/order_swimlane.html">order_swimlane()</a></code> 
 <span>  <span class="fu"><a href="../reference/order_swimlane.html">order_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/cohorts-1.png" class="r-plt" alt="Swimlane plot with lanes grouped and colored by cohort, blue for Cohort A and orange for Cohort B" width="100%"></p>
@@ -154,6 +158,7 @@ the left margin.</li>
 <span>    marker_label <span class="op">=</span> <span class="st">"Partial response"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane_rug.html">geom_swimlane_rug</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">prior_drug</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Time on study by subject"</span>, x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="gallery_files/figure-html/annotated-1.png" class="r-plt" alt="Swimlane plot colored by cohort with shaped points marking each subject's end-of-study status, partial responses, prior therapy flags in the left margin, and arrows for subjects still on study" width="100%"></p>
@@ -164,9 +169,24 @@ the left margin.</li>
 <p>With one row per subject and phase, bar segments stack in
 factor-level order. Here each lane splits into treatment and follow-up
 phases; note that <code><a href="../reference/order_swimlane.html">order_swimlane()</a></code> runs before pivoting so
-lanes stay ordered by total duration:</p>
+lanes stay ordered by total duration.</p>
+<p>Shapes assign in factor-level order, so a plot with different status
+levels would reshuffle them: this plot has no partial responses, and
+“Physician decision” would silently inherit the diamond that meant
+“Partial response” above. When a document has several swimlanes, pin
+each status to its shape with a named <code>values</code> vector:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">status_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Adverse event"</span> <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  <span class="st">"Completed"</span> <span class="op">=</span> <span class="fl">17</span>,</span>
+<span>  <span class="st">"Disease progression"</span> <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  <span class="st">"Partial response"</span> <span class="op">=</span> <span class="fl">18</span>,</span>
+<span>  <span class="st">"Physician decision"</span> <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="st">"Prior therapy"</span> <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="st">"Withdrawal by subject"</span> <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/order_swimlane.html">order_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    Treatment <span class="op">=</span> <span class="va">weeks_on_treatment</span>,</span>
@@ -180,25 +200,34 @@ lanes stay ordered by total duration:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks</span>, <span class="va">phase</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane_status.html">geom_swimlane_status</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">reason_off_study</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_fill_swimlane.html">scale_shape_swimlane</a></span><span class="op">(</span></span>
+<span>    values <span class="op">=</span> <span class="va">status_shapes</span>,</span>
+<span>    guide <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>order <span class="op">=</span> <span class="fl">3</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Treatment and follow-up phases"</span>, x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/stacked-1.png" class="r-plt" alt="Swimlane plot where each bar is split into a blue treatment segment followed by an orange follow-up segment" width="100%"></p>
+<p><img src="gallery_files/figure-html/stacked-1.png" class="r-plt" alt="Swimlane plot where each bar is split into a blue treatment segment followed by an orange follow-up segment, with the same status shapes as the previous figure" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="text-annotations">Text annotations<a class="anchor" aria-label="anchor" href="#text-annotations"></a>
 </h2>
 <p>Prefer text over symbols? <code><a href="../reference/geom_swimlane_label.html">geom_swimlane_label()</a></code> writes
-each status past the end of its bar. Widen the right margin to make
-room:</p>
+each status past the end of its bar. Subjects with <code>NA</code> are
+skipped, which would leave ongoing subjects indistinguishable from
+missing data, so recode them to a label first. Widen the right margin to
+make room:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patient_disposition</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>reason_off_study <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/coalesce.html" class="external-link">coalesce</a></span><span class="op">(</span><span class="va">reason_off_study</span>, <span class="st">"On study"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/order_swimlane.html">order_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane_label.html">geom_swimlane_label</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">reason_off_study</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span>extra_margin_r <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
-<p><img src="gallery_files/figure-html/labels-1.png" class="r-plt" alt="Swimlane plot with each subject's reason off study written as text just past the end of its bar" width="100%"></p>
+<p><img src="gallery_files/figure-html/labels-1.png" class="r-plt" alt="Swimlane plot with each subject's status, including On study, written as text just past the end of its bar" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="customization">Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
@@ -212,6 +241,7 @@ through <code><a href="../reference/theme_swimlane.html">theme_swimlane()</a></c
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_swimlane.html">geom_swimlane</a></span><span class="op">(</span><span class="va">subject</span>, <span class="va">weeks_on_study</span>, <span class="va">cohort</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/breaks_width.html" class="external-link">breaks_width</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Weeks on study"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/theme_swimlane.html">theme_swimlane</a></span><span class="op">(</span></span>
 <span>    base_size <span class="op">=</span> <span class="fl">12</span>,</span>
