@@ -36,6 +36,9 @@ plots built against 0.0.0.9000 will need updates.
 * `scale_fill_swimlane()` fills bars with a slight tint of the Okabe-Ito
   palette so the near-black markers stay dominant;
   `scale_colour_swimlane()` keeps the full-strength hues.
+* `theme_swimlane()` gains a `base_family` argument for setting a font
+  family; the gallery vignette documents font handling across graphics
+  devices.
 * `scale_shape_swimlane()` gains a `values` argument. Shapes otherwise
   assign in factor-level order, so pass a named vector to pin each status
   to the same shape across plots.

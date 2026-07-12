@@ -4,11 +4,15 @@
 \alias{theme_swimlane}
 \title{A ggplot theme for swimlane plots}
 \usage{
-theme_swimlane(base_size = 11, extra_margin_r = 10, ...)
+theme_swimlane(base_size = 11, base_family = "", extra_margin_r = 10, ...)
 }
 \arguments{
 \item{base_size}{Base font size in pts, passed to
 \code{\link[ggplot2:theme_minimal]{ggplot2::theme_minimal()}}.}
+
+\item{base_family}{Base font family, passed to \code{\link[ggplot2:theme_minimal]{ggplot2::theme_minimal()}}.
+The default \code{""} uses the graphics device's default font, which works on
+every system; pass an installed font's name to use a house font.}
 
 \item{extra_margin_r}{Extra right margin in pts, to make room for
 annotations that extend past the last bar (e.g. \code{\link[=geom_swimlane_label]{geom_swimlane_label()}}).}

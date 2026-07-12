@@ -34,7 +34,7 @@ value of \code{status_var}.}
 with a separate legend entry. If \code{FALSE}, the \code{ongoing} label is treated
 as a regular status level in the shape legend.}
 
-\item{size}{Point size; the ongoing arrow is drawn at \code{1.4 * size}.}
+\item{size}{Point size; the ongoing arrow is scaled to match.}
 
 \item{colour}{Point color, used for both the outline and (by default) the
 fill of the glyph, and for the ongoing arrow.}
@@ -47,7 +47,8 @@ fill of the glyph, and for the ongoing arrow.}
 \item{halo}{Color of the ring drawn beneath each status glyph, separating
 it from the bar fill. Use \code{NA} to disable (e.g. on dark backgrounds).}
 
-\item{...}{Other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
+\item{...}{Other arguments passed to the \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} status
+layer.}
 }
 \value{
 A list of ggplot2 layers (and, when \code{arrow = TRUE}, a scale that

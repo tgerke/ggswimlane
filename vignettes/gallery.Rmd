@@ -177,3 +177,25 @@ patient_disposition |>
     legend.position.inside = c(0.9, 0.15)
   )
 ```
+
+## Fonts
+
+`theme_swimlane()` deliberately sets no font family, so plots use your
+graphics device's default and render the same everywhere. To use a house
+font, pass any installed font's name as `base_family`:
+
+```{r fonts, eval = FALSE}
+patient_disposition |>
+  order_swimlane(subject, weeks_on_study, cohort) |>
+  ggplot() +
+  geom_swimlane(subject, weeks_on_study, cohort) +
+  scale_x_continuous(breaks = scales::breaks_width(12)) +
+  labs(x = "Weeks on study") +
+  theme_swimlane(base_family = "Atkinson Hyperlegible")
+```
+
+Font lookup depends on the graphics device. The
+[ragg](https://ragg.r-lib.org) devices resolve any font installed on your
+system by name; in R Markdown or Quarto, set the chunk option
+`dev = "ragg_png"`. The base `pdf()` device only knows a handful of built-in
+typefaces, so for PDF output use `dev = "cairo_pdf"` instead.

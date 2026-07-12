@@ -19,3 +19,8 @@ test_that("theme arguments pass through ...", {
   thm <- theme_swimlane(legend.position = "right")
   expect_equal(thm$legend.position, "right")
 })
+
+test_that("base_family reaches the base text element", {
+  thm <- theme_swimlane(base_family = "Palatino")
+  expect_equal(thm$text$family, "Palatino")
+})

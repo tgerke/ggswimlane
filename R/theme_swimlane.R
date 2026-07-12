@@ -7,6 +7,9 @@
 #'
 #' @param base_size Base font size in pts, passed to
 #'   [ggplot2::theme_minimal()].
+#' @param base_family Base font family, passed to [ggplot2::theme_minimal()].
+#'   The default `""` uses the graphics device's default font, which works on
+#'   every system; pass an installed font's name to use a house font.
 #' @param extra_margin_r Extra right margin in pts, to make room for
 #'   annotations that extend past the last bar (e.g. [geom_swimlane_label()]).
 #' @param ... Further arguments passed to [ggplot2::theme()], overriding the
@@ -23,8 +26,9 @@
 #'   geom_swimlane(subject, weeks_on_study, cohort) +
 #'   labs(x = "Weeks on study") +
 #'   theme_swimlane()
-theme_swimlane <- function(base_size = 11, extra_margin_r = 10, ...) {
-  ggplot2::theme_minimal(base_size = base_size) +
+theme_swimlane <- function(base_size = 11, base_family = "",
+                           extra_margin_r = 10, ...) {
+  ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       plot.title.position = "plot",
       plot.title = ggplot2::element_text(face = "bold"),
