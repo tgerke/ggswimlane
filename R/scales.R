@@ -4,8 +4,10 @@ swim_colors <- c(
   "#D55E00", "#56B4E9", "#F0E442", "#999999"
 )
 
-# Solid shapes first for legibility at small marker sizes
-swim_shapes <- c(16, 17, 15, 18, 3, 4, 8)
+# Solid shapes first for legibility at small marker sizes, then open
+# outlines. No line-only glyphs (+, x, *): their strokes read as arrow
+# shafts or error bars when drawn at the end of a bar.
+swim_shapes <- c(16, 17, 15, 18, 1, 0, 5, 2)
 
 swim_pal <- function() {
   function(n) {
@@ -37,11 +39,19 @@ swim_shape_pal <- function() {
 #'
 #' Color and fill scales built on a reordered [Okabe-Ito
 #' palette](https://jfly.uni-koeln.de/color/) (colorblind-safe, 8 colors), and
-#' a shape scale of legible solid-first symbols (7 shapes). These are applied
-#' automatically by [geom_swimlane()]; use them directly to style additional
-#' layers, or replace them with any other discrete scale.
+#' a shape scale of legible closed symbols (8 shapes, solid first). These are
+#' applied automatically by [geom_swimlane()]; use them directly to style
+#' additional layers, or replace them with any other discrete scale.
+#'
+#' By default shapes are assigned in factor-level order, so two plots with
+#' different status levels assign different shapes to the same status. Pass a
+#' named `values` vector to `scale_shape_swimlane()` to pin each status to a
+#' shape across plots.
 #'
 #' @param ... Arguments passed to [ggplot2::discrete_scale()].
+#' @param values Optional vector of shapes for `scale_shape_swimlane()`,
+#'   named by level to pin statuses to shapes (as in
+#'   [ggplot2::scale_shape_manual()]). Defaults to the built-in palette.
 #'
 #' @return A ggplot2 scale object.
 #' @export
@@ -68,6 +78,19 @@ scale_color_swimlane <- scale_colour_swimlane
 
 #' @rdname scale_fill_swimlane
 #' @export
-scale_shape_swimlane <- function(...) {
-  ggplot2::discrete_scale("shape", palette = swim_shape_pal(), ...)
+scale_shape_swimlane <- function(..., values = NULL) {
+  palette <- if (is.null(values)) {
+    swim_shape_pal()
+  } else {
+    function(n) {
+      if (is.null(names(values)) && n > length(values)) {
+        cli::cli_abort(
+          "{.arg values} has {length(values)} shape{?s} but {n} {?is/are}
+           needed; name the values or supply enough shapes."
+        )
+      }
+      values
+    }
+  }
+  ggplot2::discrete_scale("shape", palette = palette, ...)
 }

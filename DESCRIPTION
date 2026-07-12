@@ -25,6 +25,7 @@ LazyData: true
 Suggests:
     knitr,
     rmarkdown,
+    scales,
     testthat (>= 3.0.0),
     tidyr,
     vdiffr

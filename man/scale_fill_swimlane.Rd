@@ -13,19 +13,29 @@ scale_colour_swimlane(...)
 
 scale_color_swimlane(...)
 
-scale_shape_swimlane(...)
+scale_shape_swimlane(..., values = NULL)
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.}
+
+\item{values}{Optional vector of shapes for \code{scale_shape_swimlane()},
+named by level to pin statuses to shapes (as in
+\code{\link[ggplot2:scale_shape_manual]{ggplot2::scale_shape_manual()}}). Defaults to the built-in palette.}
 }
 \value{
 A ggplot2 scale object.
 }
 \description{
 Color and fill scales built on a reordered \href{https://jfly.uni-koeln.de/color/}{Okabe-Ito palette} (colorblind-safe, 8 colors), and
-a shape scale of legible solid-first symbols (7 shapes). These are applied
-automatically by \code{\link[=geom_swimlane]{geom_swimlane()}}; use them directly to style additional
-layers, or replace them with any other discrete scale.
+a shape scale of legible closed symbols (8 shapes, solid first). These are
+applied automatically by \code{\link[=geom_swimlane]{geom_swimlane()}}; use them directly to style
+additional layers, or replace them with any other discrete scale.
+}
+\details{
+By default shapes are assigned in factor-level order, so two plots with
+different status levels assign different shapes to the same status. Pass a
+named \code{values} vector to \code{scale_shape_swimlane()} to pin each status to a
+shape across plots.
 }
 \examples{
 library(ggplot2)
