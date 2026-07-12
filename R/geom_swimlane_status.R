@@ -16,9 +16,16 @@
 #' @param arrow If `TRUE` (default), ongoing subjects get a rightward arrow
 #'   with a separate legend entry. If `FALSE`, the `ongoing` label is treated
 #'   as a regular status level in the shape legend.
-#' @param size Point size; the ongoing arrow is drawn at `1.6 * size`.
-#' @param colour Point color.
-#' @param ... Other arguments passed to [ggplot2::geom_point()].
+#' @param size Point size; the ongoing arrow is scaled to match.
+#' @param colour Point color, used for both the outline and (by default) the
+#'   fill of the glyph, and for the ongoing arrow.
+#' @param fill Fill color for the solid glyphs (shapes 21-25). Defaults to
+#'   `colour`.
+#' @param stroke Outline width of the glyph.
+#' @param halo Color of the ring drawn beneath each status glyph, separating
+#'   it from the bar fill. Use `NA` to disable (e.g. on dark backgrounds).
+#' @param ... Other arguments passed to the [ggplot2::geom_point()] status
+#'   layer.
 #'
 #' @return A list of ggplot2 layers (and, when `arrow = TRUE`, a scale that
 #'   creates the arrow's legend entry).
@@ -36,7 +43,9 @@
 #'   theme_swimlane()
 geom_swimlane_status <- function(id_var, duration_var, status_var,
                                  ongoing = "On study", arrow = TRUE,
-                                 size = 2.5, colour = "grey20", ...) {
+                                 size = 2.8, colour = "grey20",
+                                 fill = colour, stroke = 0.75,
+                                 halo = "white", ...) {
   status_quo <- rlang::enquo(status_var)
   quos <- list(rlang::enquo(id_var), rlang::enquo(duration_var), status_quo)
 
@@ -46,58 +55,78 @@ geom_swimlane_status <- function(id_var, duration_var, status_var,
     data
   }
 
+  mapping <- ggplot2::aes(
+    y = {{ id_var }}, x = {{ duration_var }},
+    shape = .data$.swim_status
+  )
+
   if (!arrow) {
-    return(list(
-      ggplot2::geom_point(
-        mapping = ggplot2::aes(
-          y = {{ id_var }}, x = {{ duration_var }},
-          shape = .data$.swim_status
-        ),
-        data = swim_layer_data(quos, "geom_swimlane_status", recode_status),
-        colour = colour,
-        size = size,
-        ...
+    layer_data <- swim_layer_data(quos, "geom_swimlane_status", recode_status)
+    return(c(
+      swim_halo_layer(mapping, layer_data, size, stroke, halo),
+      list(
+        ggplot2::geom_point(
+          mapping = mapping,
+          data = layer_data,
+          colour = colour,
+          fill = fill,
+          size = size,
+          stroke = stroke,
+          ...
+        )
       )
     ))
   }
 
+  duration_quo <- quos[[2]]
   off_study <- swim_layer_data(quos, "geom_swimlane_status", function(data) {
     data <- recode_status(data)
     data[data$.swim_status != ongoing, , drop = FALSE]
   })
   on_study <- swim_layer_data(quos, "geom_swimlane_status", function(data) {
     data <- recode_status(data)
-    data[data$.swim_status == ongoing, , drop = FALSE]
+    # arrow shaft length: a fixed fraction of the longest lane
+    delta <- 0.02 * max(rlang::eval_tidy(duration_quo, data), na.rm = TRUE)
+    data <- data[data$.swim_status == ongoing, , drop = FALSE]
+    data$.swim_arrow_end <- rlang::eval_tidy(duration_quo, data) + delta
+    data
   })
 
-  list(
-    ggplot2::geom_point(
-      mapping = ggplot2::aes(
-        y = {{ id_var }}, x = {{ duration_var }},
-        shape = .data$.swim_status
+  c(
+    swim_halo_layer(mapping, off_study, size, stroke, halo),
+    list(
+      ggplot2::geom_point(
+        mapping = mapping,
+        data = off_study,
+        colour = colour,
+        fill = fill,
+        size = size,
+        stroke = stroke,
+        ...
       ),
-      data = off_study,
-      colour = colour,
-      size = size,
-      ...
-    ),
-    # A constant alpha mapping gives the arrow its own legend entry without
-    # touching the shared shape scale; the key glyph inherits the arrow shape.
-    ggplot2::geom_point(
-      mapping = ggplot2::aes(
-        y = {{ id_var }}, x = {{ duration_var }},
-        alpha = !!ongoing
+      # A constant alpha mapping gives the arrow its own legend entry without
+      # touching the shared shape scale; the key glyph inherits the arrow.
+      # Drawn as segment geometry, not a font glyph: arrowhead characters
+      # fail on the base pdf() device.
+      ggplot2::geom_segment(
+        mapping = ggplot2::aes(
+          y = {{ id_var }}, yend = {{ id_var }},
+          x = {{ duration_var }}, xend = .data$.swim_arrow_end,
+          alpha = !!ongoing
+        ),
+        data = on_study,
+        colour = colour,
+        linewidth = size * 0.25,
+        arrow = ggplot2::arrow(
+          type = "closed", angle = 28,
+          length = ggplot2::unit(size * 1.9, "pt")
+        )
       ),
-      data = on_study,
-      shape = "\u2192",
-      colour = colour,
-      size = size * 1.6,
-      ...
-    ),
-    ggplot2::scale_alpha_manual(
-      values = stats::setNames(1, ongoing),
-      name = NULL,
-      guide = ggplot2::guide_legend(order = 2)
+      ggplot2::scale_alpha_manual(
+        values = stats::setNames(1, ongoing),
+        name = NULL,
+        guide = ggplot2::guide_legend(order = 2)
+      )
     )
   )
 }

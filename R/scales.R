@@ -4,21 +4,31 @@ swim_colors <- c(
   "#D55E00", "#56B4E9", "#F0E442", "#999999"
 )
 
-# Solid shapes first for legibility at small marker sizes, then open
-# outlines. No line-only glyphs (+, x, *): their strokes read as arrow
-# shafts or error bars when drawn at the end of a bar.
-swim_shapes <- c(16, 17, 15, 18, 1, 0, 5, 2)
+# swim_colors mixed 15% toward white, used for bar fills so the near-black
+# markers stay dominant. Precomputed from
+# round(col2rgb(swim_colors) * 0.85 + 255 * 0.15); worst adjacent-pair CVD
+# separation stays above the deltaE 12 legibility floor.
+swim_fills <- c(
+  "#2687BE", "#EAAD26", "#26AD88", "#D48DB4",
+  "#DB7626", "#6FBFEC", "#F2E85E", "#A8A8A8"
+)
 
-swim_pal <- function() {
+# Fillable shapes first (drawn solid via fill, with room for a halo ring),
+# then open outlines. No line-only glyphs (+, x, *): their strokes read as
+# arrow shafts or error bars when drawn at the end of a bar.
+swim_shapes <- c(21, 24, 22, 23, 25, 1, 0, 5)
+
+swim_pal <- function(colors = swim_colors) {
+  force(colors)
   function(n) {
-    if (n > length(swim_colors)) {
+    if (n > length(colors)) {
       cli::cli_warn(
-        "The swimlane palette has {length(swim_colors)} colors but {n} are
+        "The swimlane palette has {length(colors)} colors but {n} are
          needed; colors will be recycled."
       )
-      return(rep_len(swim_colors, n))
+      return(rep_len(colors, n))
     }
-    swim_colors[seq_len(n)]
+    colors[seq_len(n)]
   }
 }
 
@@ -39,7 +49,9 @@ swim_shape_pal <- function() {
 #'
 #' Color and fill scales built on a reordered [Okabe-Ito
 #' palette](https://jfly.uni-koeln.de/color/) (colorblind-safe, 8 colors), and
-#' a shape scale of legible closed symbols (8 shapes, solid first). These are
+#' a shape scale of legible symbols (8 shapes, solid first). The fill scale
+#' uses a slight tint of the palette so that dark event markers stand out
+#' against the bars; the color scale keeps the full-strength hues. These are
 #' applied automatically by [geom_swimlane()]; use them directly to style
 #' additional layers, or replace them with any other discrete scale.
 #'
@@ -63,7 +75,7 @@ swim_shape_pal <- function() {
 #'   geom_swimlane(subject, weeks_on_study, cohort) +
 #'   theme_swimlane()
 scale_fill_swimlane <- function(...) {
-  ggplot2::discrete_scale("fill", palette = swim_pal(), ...)
+  ggplot2::discrete_scale("fill", palette = swim_pal(swim_fills), ...)
 }
 
 #' @rdname scale_fill_swimlane

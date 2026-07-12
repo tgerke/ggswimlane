@@ -3,19 +3,25 @@ test_that("NA statuses are recoded to the ongoing label", {
     geom_swimlane(id, weeks, arm) +
     geom_swimlane_status(id, weeks, status)
   built <- ggplot2::ggplot_build(p)
-  # layer 2: off-study points; layer 3: ongoing arrows
-  expect_equal(nrow(built$data[[2]]), 3)
-  expect_equal(nrow(built$data[[3]]), 1)
+  # layer 2: halo; layer 3: off-study points; layer 4: ongoing arrows
+  expect_equal(nrow(built$data[[3]]), 3)
+  expect_equal(nrow(built$data[[4]]), 1)
 })
 
 test_that("arrow = FALSE folds ongoing into the shape legend", {
   layers <- geom_swimlane_status(id, weeks, status, arrow = FALSE)
-  expect_length(layers, 1)
+  expect_length(layers, 2)
   p <- swim_test_plot() +
     geom_swimlane(id, weeks, arm) +
     geom_swimlane_status(id, weeks, status, arrow = FALSE)
   built <- ggplot2::ggplot_build(p)
-  expect_equal(nrow(built$data[[2]]), 4)
+  expect_equal(nrow(built$data[[3]]), 4)
+})
+
+test_that("halo = NA drops the halo layer", {
+  expect_length(
+    geom_swimlane_status(id, weeks, status, arrow = FALSE, halo = NA), 1
+  )
 })
 
 test_that("status points render with arrow legend", {

@@ -9,8 +9,11 @@ geom_swimlane_marker(
   time_var,
   marker_var = NULL,
   marker_label = NULL,
-  size = 2.5,
+  size = 2.8,
   colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
   ...
 )
 }
@@ -28,7 +31,16 @@ event types. Cannot be combined with \code{marker_label}.}
 
 \item{size}{Point size.}
 
-\item{colour}{Point color.}
+\item{colour}{Point color, used for both the outline and (by default) the
+fill of the glyph.}
+
+\item{fill}{Fill color for the solid glyphs (shapes 21-25). Defaults to
+\code{colour}.}
+
+\item{stroke}{Outline width of the glyph.}
+
+\item{halo}{Color of the ring drawn beneath each glyph, separating it from
+the bar fill. Use \code{NA} to disable (e.g. on dark backgrounds).}
 
 \item{...}{Other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }

@@ -13,7 +13,13 @@
 #' @param marker_label Optional string naming this event in the shape legend
 #'   (e.g. `"Partial response"`). Cannot be combined with `marker_var`.
 #' @param size Point size.
-#' @param colour Point color.
+#' @param colour Point color, used for both the outline and (by default) the
+#'   fill of the glyph.
+#' @param fill Fill color for the solid glyphs (shapes 21-25). Defaults to
+#'   `colour`.
+#' @param stroke Outline width of the glyph.
+#' @param halo Color of the ring drawn beneath each glyph, separating it from
+#'   the bar fill. Use `NA` to disable (e.g. on dark backgrounds).
 #' @param ... Other arguments passed to [ggplot2::geom_point()].
 #'
 #' @return A list containing a ggplot2 layer.
@@ -33,8 +39,9 @@
 #'   labs(x = "Weeks on study") +
 #'   theme_swimlane()
 geom_swimlane_marker <- function(id_var, time_var, marker_var = NULL,
-                                 marker_label = NULL, size = 2.5,
-                                 colour = "grey20", ...) {
+                                 marker_label = NULL, size = 2.8,
+                                 colour = "grey20", fill = colour,
+                                 stroke = 0.75, halo = "white", ...) {
   time_quo <- rlang::enquo(time_var)
   marker_quo <- rlang::enquo(marker_var)
   has_marker_var <- !rlang::quo_is_null(marker_quo)
@@ -62,15 +69,22 @@ geom_swimlane_marker <- function(id_var, time_var, marker_var = NULL,
     ggplot2::aes(y = {{ id_var }}, x = {{ time_var }})
   }
 
-  list(
-    ggplot2::geom_point(
-      mapping = mapping,
-      data = swim_layer_data(
-        quos, "geom_swimlane_marker", swim_drop_na(time_quo)
-      ),
-      colour = colour,
-      size = size,
-      ...
+  layer_data <- swim_layer_data(
+    quos, "geom_swimlane_marker", swim_drop_na(time_quo)
+  )
+
+  c(
+    swim_halo_layer(mapping, layer_data, size, stroke, halo),
+    list(
+      ggplot2::geom_point(
+        mapping = mapping,
+        data = layer_data,
+        colour = colour,
+        fill = fill,
+        size = size,
+        stroke = stroke,
+        ...
+      )
     )
   )
 }

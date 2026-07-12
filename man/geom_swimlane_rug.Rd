@@ -4,7 +4,16 @@
 \alias{geom_swimlane_rug}
 \title{Mark baseline characteristics in the left margin of a swimlane}
 \usage{
-geom_swimlane_rug(id_var, rug_var, size = 2, colour = "grey20", ...)
+geom_swimlane_rug(
+  id_var,
+  rug_var,
+  size = 2.3,
+  colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
+  ...
+)
 }
 \arguments{
 \item{id_var}{Column with the subject identifier, mapped to the y-axis.}
@@ -14,7 +23,16 @@ otherwise, mapped to shape.}
 
 \item{size}{Point size.}
 
-\item{colour}{Point color.}
+\item{colour}{Point color, used for both the outline and (by default) the
+fill of the glyph.}
+
+\item{fill}{Fill color for the solid glyphs (shapes 21-25). Defaults to
+\code{colour}.}
+
+\item{stroke}{Outline width of the glyph.}
+
+\item{halo}{Color of the ring drawn beneath each glyph. Use \code{NA} to
+disable (e.g. on dark backgrounds).}
 
 \item{...}{Other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }

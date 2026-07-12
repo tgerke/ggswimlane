@@ -3,7 +3,8 @@ test_that("rug skips subjects without the flag", {
     geom_swimlane(id, weeks) +
     geom_swimlane_rug(id, baseline)
   built <- ggplot2::ggplot_build(p)
-  expect_equal(nrow(built$data[[2]]), 2)
+  # layer 2: halo; layer 3: rug points
+  expect_equal(nrow(built$data[[3]]), 2)
 })
 
 test_that("rug renders in the left margin with a legend entry", {

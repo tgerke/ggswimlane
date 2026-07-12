@@ -27,7 +27,9 @@ A ggplot2 scale object.
 }
 \description{
 Color and fill scales built on a reordered \href{https://jfly.uni-koeln.de/color/}{Okabe-Ito palette} (colorblind-safe, 8 colors), and
-a shape scale of legible closed symbols (8 shapes, solid first). These are
+a shape scale of legible symbols (8 shapes, solid first). The fill scale
+uses a slight tint of the palette so that dark event markers stand out
+against the bars; the color scale keeps the full-strength hues. These are
 applied automatically by \code{\link[=geom_swimlane]{geom_swimlane()}}; use them directly to style
 additional layers, or replace them with any other discrete scale.
 }

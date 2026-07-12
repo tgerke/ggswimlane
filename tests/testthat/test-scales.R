@@ -1,7 +1,9 @@
 test_that("swimlane palettes return the documented values", {
   expect_equal(swim_pal()(2), c("#0072B2", "#E69F00"))
   expect_equal(swim_pal()(8), swim_colors)
-  expect_equal(swim_shape_pal()(3), c(16, 17, 15))
+  expect_equal(swim_pal(swim_fills)(2), c("#2687BE", "#EAAD26"))
+  expect_equal(swim_pal(swim_fills)(8), swim_fills)
+  expect_equal(swim_shape_pal()(3), c(21, 24, 22))
   expect_equal(swim_shape_pal()(8), swim_shapes)
 })
 

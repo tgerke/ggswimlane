@@ -106,13 +106,13 @@ with a named `values` vector:
 
 ```{r stacked, fig.alt="Swimlane plot where each bar is split into a blue treatment segment followed by an orange follow-up segment, with the same status shapes as the previous figure"}
 status_shapes <- c(
-  "Adverse event" = 16,
-  "Completed" = 17,
-  "Disease progression" = 15,
-  "Partial response" = 18,
-  "Physician decision" = 1,
-  "Prior therapy" = 0,
-  "Withdrawal by subject" = 5
+  "Adverse event" = 21,
+  "Completed" = 24,
+  "Disease progression" = 22,
+  "Partial response" = 23,
+  "Physician decision" = 25,
+  "Prior therapy" = 1,
+  "Withdrawal by subject" = 0
 )
 
 patient_disposition |>

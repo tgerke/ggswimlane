@@ -36,7 +36,7 @@ theme_swimlane <- function(base_size = 11, extra_margin_r = 10, ...) {
       panel.grid.major.x = ggplot2::element_line(colour = "grey92"),
       axis.ticks = ggplot2::element_blank(),
       axis.title.y = ggplot2::element_blank(),
-      axis.text.y = ggplot2::element_text(colour = "grey30"),
+      axis.text = ggplot2::element_text(colour = "grey30"),
       axis.title.x = ggplot2::element_text(
         margin = ggplot2::margin(7.5, 0, 0, 0, "pt")
       ),

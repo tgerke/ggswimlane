@@ -26,6 +26,16 @@ plots built against 0.0.0.9000 will need updates.
 * The default shape palette uses closed symbols only (solid first, then
   open outlines). The line-only glyphs (`+`, `x`, `*`) are gone: drawn at
   the end of a bar, their strokes read as arrow shafts or error bars.
+* `geom_swimlane_status()`, `geom_swimlane_marker()`, and
+  `geom_swimlane_rug()` draw a white halo ring beneath each glyph so that
+  markers separate cleanly from the bars; a new `halo` argument controls the
+  ring color (`NA` disables it), and new `fill` and `stroke` arguments
+  style the glyphs themselves. The solid glyphs are now the fillable shapes
+  21-25, and the ongoing arrow in `geom_swimlane_status()` is a solid
+  arrowhead instead of a thin line arrow.
+* `scale_fill_swimlane()` fills bars with a slight tint of the Okabe-Ito
+  palette so the near-black markers stay dominant;
+  `scale_colour_swimlane()` keeps the full-strength hues.
 * `scale_shape_swimlane()` gains a `values` argument. Shapes otherwise
   assign in factor-level order, so pass a named vector to pin each status
   to the same shape across plots.

@@ -10,8 +10,11 @@ geom_swimlane_status(
   status_var,
   ongoing = "On study",
   arrow = TRUE,
-  size = 2.5,
+  size = 2.8,
   colour = "grey20",
+  fill = colour,
+  stroke = 0.75,
+  halo = "white",
   ...
 )
 }
@@ -31,9 +34,18 @@ value of \code{status_var}.}
 with a separate legend entry. If \code{FALSE}, the \code{ongoing} label is treated
 as a regular status level in the shape legend.}
 
-\item{size}{Point size; the ongoing arrow is drawn at \code{1.6 * size}.}
+\item{size}{Point size; the ongoing arrow is drawn at \code{1.4 * size}.}
 
-\item{colour}{Point color.}
+\item{colour}{Point color, used for both the outline and (by default) the
+fill of the glyph, and for the ongoing arrow.}
+
+\item{fill}{Fill color for the solid glyphs (shapes 21-25). Defaults to
+\code{colour}.}
+
+\item{stroke}{Outline width of the glyph.}
+
+\item{halo}{Color of the ring drawn beneath each status glyph, separating
+it from the bar fill. Use \code{NA} to disable (e.g. on dark backgrounds).}
 
 \item{...}{Other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.}
 }

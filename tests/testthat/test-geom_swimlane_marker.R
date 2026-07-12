@@ -3,7 +3,8 @@ test_that("marker skips subjects without the event", {
     geom_swimlane(id, weeks) +
     geom_swimlane_marker(id, response)
   built <- ggplot2::ggplot_build(p)
-  expect_equal(nrow(built$data[[2]]), 2)
+  # layer 2: halo; layer 3: markers
+  expect_equal(nrow(built$data[[3]]), 2)
 })
 
 test_that("marker_var and marker_label are mutually exclusive", {

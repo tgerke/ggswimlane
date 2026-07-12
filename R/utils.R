@@ -41,3 +41,23 @@ swim_drop_na <- function(quo) {
     data[!is.na(rlang::eval_tidy(quo, data)), , drop = FALSE]
   }
 }
+
+# A point layer drawn beneath a marker layer to give it a halo ring that
+# separates the glyph from the bar fill. Same size-plus-stroke enlargement
+# for solid and open shapes: the extra stroke is what rims open outlines.
+swim_halo_layer <- function(mapping, data, size, stroke, halo) {
+  if (length(halo) != 1 || is.na(halo)) {
+    return(NULL)
+  }
+  list(
+    ggplot2::geom_point(
+      mapping = mapping,
+      data = data,
+      colour = halo,
+      fill = halo,
+      size = size + 0.4,
+      stroke = stroke + 1.5,
+      show.legend = FALSE
+    )
+  )
+}
