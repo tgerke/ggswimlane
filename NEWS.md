@@ -1,3 +1,13 @@
+# ggswimlane 0.2.0
+
+* Default aesthetics modernized further: haloed markers, tinted (partially
+  transparent) bar fills, and a geometric arrowhead for ongoing subjects
+  replacing the text-based arrow.
+* Figure legibility improvements: closed-status shapes and pinned shape
+  values so mappings stay stable across plots, plus legend and axis fixes.
+* `theme_swimlane()` gains a `base_family` argument; font handling is now
+  documented in the gallery vignette.
+
 # ggswimlane 0.1.0
 
 This release modernizes the package throughout. It is a breaking release:

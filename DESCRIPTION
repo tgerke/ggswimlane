@@ -1,6 +1,6 @@
 Package: ggswimlane
 Title: Create Clinical Trial Swimlanes with ggplot
-Version: 0.1.0
+Version: 0.2.0
 Authors@R:
     person(given = "Travis",
            family = "Gerke",
